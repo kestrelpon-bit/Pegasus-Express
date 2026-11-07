@@ -1,1 +1,387 @@
-{"KSUU":{"name":"Travis AFB","location":"Fairfield, California","timeZone":"America/Los_Angeles"},"KSFO":{"name":"San Francisco International","location":"San Francisco, California","timeZone":"America/Los_Angeles"},"KOAK":{"name":"Oakland International","location":"Oakland, California","timeZone":"America/Los_Angeles"},"KLAX":{"name":"Los Angeles International","location":"Los Angeles, California","timeZone":"America/Los_Angeles"},"KSAN":{"name":"San Diego International","location":"San Diego, California","timeZone":"America/Los_Angeles"},"KRNO":{"name":"Reno-Tahoe International","location":"Reno, Nevada","timeZone":"America/Los_Angeles"},"KLAS":{"name":"Harry Reid International","location":"Las Vegas, Nevada","timeZone":"America/Los_Angeles"},"KSEA":{"name":"Seattle-Tacoma International","location":"Seattle, Washington","timeZone":"America/Los_Angeles"},"KPDX":{"name":"Portland International","location":"Portland, Oregon","timeZone":"America/Los_Angeles"},"KSMF":{"name":"Sacramento International","location":"Sacramento, California","timeZone":"America/Los_Angeles"},"KPHX":{"name":"Phoenix Sky Harbor","location":"Phoenix, Arizona","timeZone":"America/Phoenix"},"KDEN":{"name":"Denver International","location":"Denver, Colorado","timeZone":"America/Denver"},"KSLC":{"name":"Salt Lake City International","location":"Salt Lake City, Utah","timeZone":"America/Denver"},"KABQ":{"name":"Albuquerque International Sunport","location":"Albuquerque, New Mexico","timeZone":"America/Denver"},"KDFW":{"name":"Dallas Fort Worth International","location":"Dallas, Texas","timeZone":"America/Chicago"},"KIAH":{"name":"Houston George Bush Intercontinental","location":"Houston, Texas","timeZone":"America/Chicago"},"KORD":{"name":"Chicago O'Hare International","location":"Chicago, Illinois","timeZone":"America/Chicago"},"KMSP":{"name":"Minneapolis-St Paul International","location":"Minneapolis, Minnesota","timeZone":"America/Chicago"},"KMEM":{"name":"Memphis International","location":"Memphis, Tennessee","timeZone":"America/Chicago"},"KSTL":{"name":"St Louis Lambert International","location":"St Louis, Missouri","timeZone":"America/Chicago"},"KATL":{"name":"Hartsfield-Jackson Atlanta International","location":"Atlanta, Georgia","timeZone":"America/New_York"},"KMIA":{"name":"Miami International","location":"Miami, Florida","timeZone":"America/New_York"},"KJFK":{"name":"John F Kennedy International","location":"New York, New York","timeZone":"America/New_York"},"KEWR":{"name":"Newark Liberty International","location":"Newark, New Jersey","timeZone":"America/New_York"},"KBOS":{"name":"Boston Logan International","location":"Boston, Massachusetts","timeZone":"America/New_York"},"KIAD":{"name":"Washington Dulles International","location":"Washington, DC","timeZone":"America/New_York"},"KDCA":{"name":"Ronald Reagan Washington National","location":"Washington, DC","timeZone":"America/New_York"},"KBWI":{"name":"Baltimore Washington International","location":"Baltimore, Maryland","timeZone":"America/New_York"},"KCHS":{"name":"Charleston AFB/International","location":"Charleston, South Carolina","timeZone":"America/New_York"},"KDOV":{"name":"Dover AFB","location":"Dover, Delaware","timeZone":"America/New_York"},"KADW":{"name":"Joint Base Andrews","location":"Camp Springs, Maryland","timeZone":"America/New_York"},"KOFF":{"name":"Offutt AFB","location":"Omaha, Nebraska","timeZone":"America/Chicago"},"KEND":{"name":"Vance AFB","location":"Enid, Oklahoma","timeZone":"America/Chicago"},"KLSV":{"name":"Nellis AFB","location":"Las Vegas, Nevada","timeZone":"America/Los_Angeles"},"KDMA":{"name":"Davis-Monthan AFB","location":"Tucson, Arizona","timeZone":"America/Phoenix"},"KEDW":{"name":"Edwards AFB","location":"Edwards, California","timeZone":"America/Los_Angeles"},"KPMD":{"name":"Palmdale Regional / USAF Plant 42","location":"Palmdale, California","timeZone":"America/Los_Angeles"},"PGUA":{"name":"Andersen AFB","location":"Yigo, Guam","timeZone":"Pacific/Guam"},"PGUM":{"name":"Antonio B Won Pat International","location":"Tamuning, Guam","timeZone":"Pacific/Guam"},"PHNL":{"name":"Daniel K Inouye International","location":"Honolulu, Hawaii","timeZone":"Pacific/Honolulu"},"PHIK":{"name":"Hickam AFB","location":"Honolulu, Hawaii","timeZone":"Pacific/Honolulu"},"RJTY":{"name":"Yokota AB","location":"Fussa, Tokyo, Japan","timeZone":"Asia/Tokyo"},"RJTT":{"name":"Tokyo Haneda","location":"Tokyo, Japan","timeZone":"Asia/Tokyo"},"RJAA":{"name":"Narita International","location":"Narita, Japan","timeZone":"Asia/Tokyo"},"RODN":{"name":"Kadena AB","location":"Okinawa, Japan","timeZone":"Asia/Tokyo"},"RKSO":{"name":"Osan AB","location":"Pyeongtaek, South Korea","timeZone":"Asia/Seoul"},"RKSI":{"name":"Incheon International","location":"Incheon, South Korea","timeZone":"Asia/Seoul"},"RKPK":{"name":"Gimhae International","location":"Busan, South Korea","timeZone":"Asia/Seoul"},"VHHH":{"name":"Hong Kong International","location":"Hong Kong","timeZone":"Asia/Hong_Kong"},"WSSS":{"name":"Singapore Changi","location":"Singapore","timeZone":"Asia/Singapore"},"RPLL":{"name":"Ninoy Aquino International","location":"Manila, Philippines","timeZone":"Asia/Manila"},"VTBS":{"name":"Suvarnabhumi","location":"Bangkok, Thailand","timeZone":"Asia/Bangkok"},"VIDP":{"name":"Indira Gandhi International","location":"Delhi, India","timeZone":"Asia/Kolkata"},"OMDB":{"name":"Dubai International","location":"Dubai, UAE","timeZone":"Asia/Dubai"},"OTHH":{"name":"Hamad International","location":"Doha, Qatar","timeZone":"Asia/Qatar"},"OERK":{"name":"King Khalid International","location":"Riyadh, Saudi Arabia","timeZone":"Asia/Riyadh"},"LTFM":{"name":"Istanbul Airport","location":"Istanbul, Türkiye","timeZone":"Europe/Istanbul"},"EGLL":{"name":"London Heathrow","location":"London, United Kingdom","timeZone":"Europe/London"},"EGKK":{"name":"London Gatwick","location":"London, United Kingdom","timeZone":"Europe/London"},"EGVN":{"name":"RAF Brize Norton","location":"Carterton, United Kingdom","timeZone":"Europe/London"},"ETAR":{"name":"Ramstein AB","location":"Ramstein, Germany","timeZone":"Europe/Berlin"},"ETAD":{"name":"Spangdahlem AB","location":"Spangdahlem, Germany","timeZone":"Europe/Berlin"},"EDDF":{"name":"Frankfurt Airport","location":"Frankfurt, Germany","timeZone":"Europe/Berlin"},"LFPG":{"name":"Paris Charles de Gaulle","location":"Paris, France","timeZone":"Europe/Paris"},"LEMD":{"name":"Adolfo Suárez Madrid-Barajas","location":"Madrid, Spain","timeZone":"Europe/Madrid"},"LIRF":{"name":"Rome Fiumicino","location":"Rome, Italy","timeZone":"Europe/Rome"},"EHAM":{"name":"Amsterdam Schiphol","location":"Amsterdam, Netherlands","timeZone":"Europe/Amsterdam"},"LOWW":{"name":"Vienna International","location":"Vienna, Austria","timeZone":"Europe/Vienna"},"LSZH":{"name":"Zurich Airport","location":"Zurich, Switzerland","timeZone":"Europe/Zurich"},"YSSY":{"name":"Sydney Kingsford Smith","location":"Sydney, Australia","timeZone":"Australia/Sydney"},"YMML":{"name":"Melbourne Airport","location":"Melbourne, Australia","timeZone":"Australia/Melbourne"},"NZAA":{"name":"Auckland Airport","location":"Auckland, New Zealand","timeZone":"Pacific/Auckland"},"FAOR":{"name":"OR Tambo International","location":"Johannesburg, South Africa","timeZone":"Africa/Johannesburg"},"FACT":{"name":"Cape Town International","location":"Cape Town, South Africa","timeZone":"Africa/Johannesburg"},"SBGR":{"name":"São Paulo Guarulhos","location":"São Paulo, Brazil","timeZone":"America/Sao_Paulo"},"MMMX":{"name":"Mexico City International","location":"Mexico City, Mexico","timeZone":"America/Mexico_City"},"SAEZ":{"name":"Ezeiza International","location":"Buenos Aires, Argentina","timeZone":"America/Argentina/Buenos_Aires"},"CYYZ":{"name":"Toronto Pearson","location":"Toronto, Canada","timeZone":"America/Toronto"},"CYVR":{"name":"Vancouver International","location":"Vancouver, Canada","timeZone":"America/Vancouver"},"CYUL":{"name":"Montréal-Trudeau","location":"Montreal, Canada","timeZone":"America/Toronto"},"MDSD":{"name":"Las Américas International","location":"Santo Domingo, Dominican Republic","timeZone":"America/Santo_Domingo"},"KIAB":{"name":"McConnell AFB","location":"Wichita, Kansas","timeZone":"America/Chicago"},"KWRI":{"name":"Joint Base McGuire-Dix-Lakehurst","location":"Wrightstown, New Jersey","timeZone":"America/New_York"},"KPSM":{"name":"Pease Air National Guard Base","location":"Portsmouth, New Hampshire","timeZone":"America/New_York"},"KGSB":{"name":"Seymour Johnson AFB","location":"Goldsboro, North Carolina","timeZone":"America/New_York"},"KSKA":{"name":"Fairchild AFB","location":"Spokane, Washington","timeZone":"America/Los_Angeles"},"KMCF":{"name":"MacDill AFB","location":"Tampa, Florida","timeZone":"America/New_York"},"KBAD":{"name":"Barksdale AFB","location":"Bossier City, Louisiana","timeZone":"America/Chicago"},"KDYS":{"name":"Dyess AFB","location":"Abilene, Texas","timeZone":"America/Chicago"},"KBAB":{"name":"Beale AFB","location":"Marysville, California","timeZone":"America/Los_Angeles"},"KMUO":{"name":"Mountain Home AFB","location":"Mountain Home, Idaho","timeZone":"America/Boise"},"KTIK":{"name":"Tinker AFB","location":"Oklahoma City, Oklahoma","timeZone":"America/Chicago"},"KTCM":{"name":"McChord Field, Joint Base Lewis-McChord","location":"Tacoma, Washington","timeZone":"America/Los_Angeles"},"KLRF":{"name":"Little Rock AFB","location":"Jacksonville, Arkansas","timeZone":"America/Chicago"},"KRDR":{"name":"Grand Forks AFB","location":"Grand Forks, North Dakota","timeZone":"America/Chicago"},"KMIB":{"name":"Minot AFB","location":"Minot, North Dakota","timeZone":"America/Chicago"},"KRCA":{"name":"Ellsworth AFB","location":"Box Elder, South Dakota","timeZone":"America/Denver"},"KSZL":{"name":"Whiteman AFB","location":"Knob Noster, Missouri","timeZone":"America/Chicago"},"KCVS":{"name":"Cannon AFB","location":"Clovis, New Mexico","timeZone":"America/Denver"},"KHMN":{"name":"Holloman AFB","location":"Alamogordo, New Mexico","timeZone":"America/Denver"},"KLUF":{"name":"Luke AFB","location":"Glendale, Arizona","timeZone":"America/Phoenix"},"KSSC":{"name":"Shaw AFB","location":"Sumter, South Carolina","timeZone":"America/New_York"},"KCOF":{"name":"Patrick Space Force Base","location":"Cocoa Beach, Florida","timeZone":"America/New_York"},"KEGI":{"name":"Duke Field","location":"Crestview, Florida","timeZone":"America/Chicago"},"KHRT":{"name":"Hurlburt Field","location":"Mary Esther, Florida","timeZone":"America/Chicago"},"KVPS":{"name":"Eglin AFB / Destin-Fort Walton Beach","location":"Valparaiso, Florida","timeZone":"America/Chicago"},"EGUN":{"name":"RAF Mildenhall","location":"Mildenhall, United Kingdom","timeZone":"Europe/London"},"EGUL":{"name":"RAF Lakenheath","location":"Lakenheath, United Kingdom","timeZone":"Europe/London"},"EGVA":{"name":"RAF Fairford","location":"Fairford, United Kingdom","timeZone":"Europe/London"},"LIPA":{"name":"Aviano Air Base","location":"Aviano, Italy","timeZone":"Europe/Rome"},"LTAG":{"name":"Incirlik Air Base","location":"Adana, Türkiye","timeZone":"Europe/Istanbul"},"LEMO":{"name":"Morón Air Base","location":"Morón, Spain","timeZone":"Europe/Madrid"},"LERT":{"name":"Naval Station Rota","location":"Rota, Spain","timeZone":"Europe/Madrid"},"LICZ":{"name":"NAS Sigonella","location":"Sigonella, Italy","timeZone":"Europe/Rome"},"LGSA":{"name":"Souda Bay","location":"Chania, Greece","timeZone":"Europe/Athens"},"ETNG":{"name":"Geilenkirchen NATO Air Base","location":"Geilenkirchen, Germany","timeZone":"Europe/Berlin"},"EBBL":{"name":"Kleine Brogel Air Base","location":"Peer, Belgium","timeZone":"Europe/Brussels"},"EHVK":{"name":"Volkel Air Base","location":"Uden, Netherlands","timeZone":"Europe/Amsterdam"},"EBCV":{"name":"Chièvres Air Base","location":"Chièvres, Belgium","timeZone":"Europe/Brussels"},"EDDS":{"name":"Stuttgart Airport","location":"Stuttgart, Germany","timeZone":"Europe/Berlin"},"EDDM":{"name":"Munich Airport","location":"Munich, Germany","timeZone":"Europe/Berlin"},"EDDB":{"name":"Berlin Brandenburg Airport","location":"Berlin, Germany","timeZone":"Europe/Berlin"},"EBBR":{"name":"Brussels Airport","location":"Brussels, Belgium","timeZone":"Europe/Brussels"},"EKCH":{"name":"Copenhagen Airport","location":"Copenhagen, Denmark","timeZone":"Europe/Copenhagen"},"ENGM":{"name":"Oslo Airport Gardermoen","location":"Oslo, Norway","timeZone":"Europe/Oslo"},"BIKF":{"name":"Keflavík International Airport","location":"Reykjanesbær, Iceland","timeZone":"Atlantic/Reykjavik"},"LPLA":{"name":"Lajes Field","location":"Terceira, Azores, Portugal","timeZone":"Atlantic/Azores"},"LPPT":{"name":"Lisbon Airport","location":"Lisbon, Portugal","timeZone":"Europe/Lisbon"},"OTBH":{"name":"Al Udeid Air Base","location":"Doha, Qatar","timeZone":"Asia/Qatar"},"OKAS":{"name":"Ali Al Salem Air Base","location":"Al Jahra, Kuwait","timeZone":"Asia/Kuwait"},"OKBK":{"name":"Kuwait International Airport","location":"Kuwait City, Kuwait","timeZone":"Asia/Kuwait"},"OEKM":{"name":"Prince Sultan Air Base","location":"Al Kharj, Saudi Arabia","timeZone":"Asia/Riyadh"},"OEDF":{"name":"King Fahd International Airport","location":"Dammam, Saudi Arabia","timeZone":"Asia/Riyadh"},"OBBI":{"name":"Bahrain International Airport","location":"Muharraq, Bahrain","timeZone":"Asia/Bahrain"},"OMAM":{"name":"Al Dhafra Air Base","location":"Abu Dhabi, UAE","timeZone":"Asia/Dubai"},"OOMS":{"name":"Muscat International Airport","location":"Muscat, Oman","timeZone":"Asia/Muscat"},"OOSA":{"name":"Salalah Airport","location":"Salalah, Oman","timeZone":"Asia/Muscat"},"ORBI":{"name":"Baghdad International Airport","location":"Baghdad, Iraq","timeZone":"Asia/Baghdad"},"ORER":{"name":"Erbil International Airport","location":"Erbil, Iraq","timeZone":"Asia/Baghdad"},"OJAI":{"name":"Queen Alia International Airport","location":"Amman, Jordan","timeZone":"Asia/Amman"},"LLBG":{"name":"Ben Gurion International Airport","location":"Tel Aviv, Israel","timeZone":"Asia/Jerusalem"},"OEJN":{"name":"King Abdulaziz International Airport","location":"Jeddah, Saudi Arabia","timeZone":"Asia/Riyadh"},"HDAM":{"name":"Djibouti-Ambouli International Airport","location":"Djibouti City, Djibouti","timeZone":"Africa/Djibouti"},"HKJK":{"name":"Jomo Kenyatta International Airport","location":"Nairobi, Kenya","timeZone":"Africa/Nairobi"},"DGAA":{"name":"Kotoka International Airport","location":"Accra, Ghana","timeZone":"Africa/Accra"},"GOOY":{"name":"Blaise Diagne International Airport","location":"Dakar, Senegal","timeZone":"Africa/Dakar"},"GMMN":{"name":"Mohammed V International Airport","location":"Casablanca, Morocco","timeZone":"Africa/Casablanca"},"RJOI":{"name":"Marine Corps Air Station Iwakuni","location":"Iwakuni, Japan","timeZone":"Asia/Tokyo"},"RJSM":{"name":"Misawa Air Base","location":"Misawa, Japan","timeZone":"Asia/Tokyo"},"RKJK":{"name":"Kunsan Air Base","location":"Gunsan, South Korea","timeZone":"Asia/Seoul"},"RKTN":{"name":"Daegu International Airport","location":"Daegu, South Korea","timeZone":"Asia/Seoul"},"RKTU":{"name":"Cheongju International Airport","location":"Cheongju, South Korea","timeZone":"Asia/Seoul"},"PWAK":{"name":"Wake Island Airfield","location":"Wake Island","timeZone":"Pacific/Wake"},"PKWA":{"name":"Bucholz Army Airfield","location":"Kwajalein Atoll, Marshall Islands","timeZone":"Pacific/Kwajalein"},"YPDN":{"name":"Darwin International Airport","location":"Darwin, Australia","timeZone":"Australia/Darwin"},"YBTL":{"name":"Townsville Airport","location":"Townsville, Australia","timeZone":"Australia/Brisbane"},"YBCS":{"name":"Cairns Airport","location":"Cairns, Australia","timeZone":"Australia/Brisbane"},"YBBN":{"name":"Brisbane Airport","location":"Brisbane, Australia","timeZone":"Australia/Brisbane"},"YPPH":{"name":"Perth Airport","location":"Perth, Australia","timeZone":"Australia/Perth"},"NZCH":{"name":"Christchurch Airport","location":"Christchurch, New Zealand","timeZone":"Pacific/Auckland"},"NFFN":{"name":"Nadi International Airport","location":"Nadi, Fiji","timeZone":"Pacific/Fiji"},"CYYC":{"name":"Calgary International Airport","location":"Calgary, Alberta, Canada","timeZone":"America/Edmonton"},"CYEG":{"name":"Edmonton International Airport","location":"Edmonton, Alberta, Canada","timeZone":"America/Edmonton"},"CYOW":{"name":"Ottawa Macdonald-Cartier International Airport","location":"Ottawa, Ontario, Canada","timeZone":"America/Toronto"},"CYQB":{"name":"Québec City Jean Lesage International Airport","location":"Québec City, Québec, Canada","timeZone":"America/Toronto"},"CYHZ":{"name":"Halifax Stanfield International Airport","location":"Halifax, Nova Scotia, Canada","timeZone":"America/Halifax"},"CYQX":{"name":"Gander International Airport","location":"Gander, Newfoundland and Labrador, Canada","timeZone":"America/St_Johns"},"CYZF":{"name":"Yellowknife Airport","location":"Yellowknife, Northwest Territories, Canada","timeZone":"America/Yellowknife"},"CYXY":{"name":"Erik Nielsen Whitehorse International Airport","location":"Whitehorse, Yukon, Canada","timeZone":"America/Whitehorse"},"PANC":{"name":"Ted Stevens Anchorage International Airport","location":"Anchorage, Alaska","timeZone":"America/Anchorage"},"PAFA":{"name":"Fairbanks International Airport","location":"Fairbanks, Alaska","timeZone":"America/Anchorage"},"PAED":{"name":"Joint Base Elmendorf-Richardson","location":"Anchorage, Alaska","timeZone":"America/Anchorage"},"BGSF":{"name":"Kangerlussuaq Airport","location":"Kangerlussuaq, Greenland","timeZone":"America/Nuuk"},"BGBW":{"name":"Narsarsuaq Airport","location":"Narsarsuaq, Greenland","timeZone":"America/Nuuk"}}
+{
+  "KSUU": {
+    "name": "Travis Air Force Base",
+    "location": "Fairfield, California",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KSFO": {
+    "name": "San Francisco International Airport",
+    "location": "San Francisco, California",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KOAK": {
+    "name": "Oakland International Airport",
+    "location": "Oakland, California",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KLAX": {
+    "name": "Los Angeles International Airport",
+    "location": "Los Angeles, California",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KSAN": {
+    "name": "San Diego International Airport",
+    "location": "San Diego, California",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KRNO": {
+    "name": "Reno-Tahoe International Airport",
+    "location": "Reno, Nevada",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KLAS": {
+    "name": "Harry Reid International Airport",
+    "location": "Las Vegas, Nevada",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KSEA": {
+    "name": "Seattle-Tacoma International Airport",
+    "location": "Seattle, Washington",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KPDX": {
+    "name": "Portland International Airport",
+    "location": "Portland, Oregon",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KSMF": {
+    "name": "Sacramento International Airport",
+    "location": "Sacramento, California",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KPHX": {
+    "name": "Phoenix Sky Harbor International Airport",
+    "location": "Phoenix, Arizona",
+    "timeZone": "America/Phoenix"
+  },
+  "KDEN": {
+    "name": "Denver International Airport",
+    "location": "Denver, Colorado",
+    "timeZone": "America/Denver"
+  },
+  "KSLC": {
+    "name": "Salt Lake City International Airport",
+    "location": "Salt Lake City, Utah",
+    "timeZone": "America/Denver"
+  },
+  "KABQ": {
+    "name": "Albuquerque International Sunport",
+    "location": "Albuquerque, New Mexico",
+    "timeZone": "America/Denver"
+  },
+  "KDFW": {
+    "name": "Dallas/Fort Worth International Airport",
+    "location": "Dallas-Fort Worth, Texas",
+    "timeZone": "America/Chicago"
+  },
+  "KIAH": {
+    "name": "George Bush Intercontinental Airport",
+    "location": "Houston, Texas",
+    "timeZone": "America/Chicago"
+  },
+  "KORD": {
+    "name": "O'Hare International Airport",
+    "location": "Chicago, Illinois",
+    "timeZone": "America/Chicago"
+  },
+  "KMSP": {
+    "name": "Minneapolis-Saint Paul International Airport",
+    "location": "Minneapolis, Minnesota",
+    "timeZone": "America/Chicago"
+  },
+  "KMEM": {
+    "name": "Memphis International Airport",
+    "location": "Memphis, Tennessee",
+    "timeZone": "America/Chicago"
+  },
+  "KSTL": {
+    "name": "St. Louis Lambert International Airport",
+    "location": "St. Louis, Missouri",
+    "timeZone": "America/Chicago"
+  },
+  "KATL": {
+    "name": "Hartsfield-Jackson Atlanta International Airport",
+    "location": "Atlanta, Georgia",
+    "timeZone": "America/New_York"
+  },
+  "KMIA": {
+    "name": "Miami International Airport",
+    "location": "Miami, Florida",
+    "timeZone": "America/New_York"
+  },
+  "KJFK": {
+    "name": "John F. Kennedy International Airport",
+    "location": "New York, New York",
+    "timeZone": "America/New_York"
+  },
+  "KEWR": {
+    "name": "Newark Liberty International Airport",
+    "location": "Newark, New Jersey",
+    "timeZone": "America/New_York"
+  },
+  "KBOS": {
+    "name": "Boston Logan International Airport",
+    "location": "Boston, Massachusetts",
+    "timeZone": "America/New_York"
+  },
+  "KIAD": {
+    "name": "Washington Dulles International Airport",
+    "location": "Dulles, Virginia",
+    "timeZone": "America/New_York"
+  },
+  "KDCA": {
+    "name": "Ronald Reagan Washington National Airport",
+    "location": "Arlington, Virginia",
+    "timeZone": "America/New_York"
+  },
+  "KBWI": {
+    "name": "Baltimore/Washington International Airport",
+    "location": "Baltimore, Maryland",
+    "timeZone": "America/New_York"
+  },
+  "KCHS": {
+    "name": "Charleston International Airport",
+    "location": "Charleston, South Carolina",
+    "timeZone": "America/New_York"
+  },
+  "KDOV": {
+    "name": "Dover Air Force Base",
+    "location": "Dover, Delaware",
+    "timeZone": "America/New_York"
+  },
+  "KADW": {
+    "name": "Joint Base Andrews",
+    "location": "Camp Springs, Maryland",
+    "timeZone": "America/New_York"
+  },
+  "KOFF": {
+    "name": "Offutt Air Force Base",
+    "location": "Omaha, Nebraska",
+    "timeZone": "America/Chicago"
+  },
+  "KEND": {
+    "name": "Vance Air Force Base",
+    "location": "Enid, Oklahoma",
+    "timeZone": "America/Chicago"
+  },
+  "KLSV": {
+    "name": "Nellis Air Force Base",
+    "location": "Las Vegas, Nevada",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KDMA": {
+    "name": "Davis-Monthan Air Force Base",
+    "location": "Tucson, Arizona",
+    "timeZone": "America/Phoenix"
+  },
+  "KEDW": {
+    "name": "Edwards Air Force Base",
+    "location": "Edwards, California",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KPMD": {
+    "name": "Palmdale Regional Airport",
+    "location": "Palmdale, California",
+    "timeZone": "America/Los_Angeles"
+  },
+  "PGUA": {
+    "name": "Andersen Air Force Base",
+    "location": "Yigo, Guam",
+    "timeZone": "Pacific/Guam"
+  },
+  "PGUM": {
+    "name": "Antonio B. Won Pat International Airport",
+    "location": "Tamuning, Guam",
+    "timeZone": "Pacific/Guam"
+  },
+  "PHNL": {
+    "name": "Daniel K. Inouye International Airport",
+    "location": "Honolulu, Hawaii",
+    "timeZone": "Pacific/Honolulu"
+  },
+  "PHIK": {
+    "name": "Hickam Air Force Base",
+    "location": "Honolulu, Hawaii",
+    "timeZone": "Pacific/Honolulu"
+  },
+  "RJTY": {
+    "name": "Yokota Air Base",
+    "location": "Fussa, Japan",
+    "timeZone": "Asia/Tokyo"
+  },
+  "RJTT": {
+    "name": "Tokyo Haneda Airport",
+    "location": "Tokyo, Japan",
+    "timeZone": "Asia/Tokyo"
+  },
+  "RJAA": {
+    "name": "Narita International Airport",
+    "location": "Narita, Japan",
+    "timeZone": "Asia/Tokyo"
+  },
+  "RODN": {
+    "name": "Kadena Air Base",
+    "location": "Okinawa, Japan",
+    "timeZone": "Asia/Tokyo"
+  },
+  "RKSO": {
+    "name": "Osan Air Base",
+    "location": "Pyeongtaek, South Korea",
+    "timeZone": "Asia/Seoul"
+  },
+  "RKSI": {
+    "name": "Incheon International Airport",
+    "location": "Incheon, South Korea",
+    "timeZone": "Asia/Seoul"
+  },
+  "RKPK": {
+    "name": "Gimhae International Airport",
+    "location": "Busan, South Korea",
+    "timeZone": "Asia/Seoul"
+  },
+  "VHHH": {
+    "name": "Hong Kong International Airport",
+    "location": "Hong Kong",
+    "timeZone": "Asia/Hong_Kong"
+  },
+  "WSSS": {
+    "name": "Singapore Changi Airport",
+    "location": "Singapore",
+    "timeZone": "Asia/Singapore"
+  },
+  "RPLL": {
+    "name": "Ninoy Aquino International Airport",
+    "location": "Manila, Philippines",
+    "timeZone": "Asia/Manila"
+  },
+  "VTBS": {
+    "name": "Suvarnabhumi Airport",
+    "location": "Bangkok, Thailand",
+    "timeZone": "Asia/Bangkok"
+  },
+  "VIDP": {
+    "name": "Indira Gandhi International Airport",
+    "location": "New Delhi, India",
+    "timeZone": "Asia/Kolkata"
+  },
+  "OMDB": {
+    "name": "Dubai International Airport",
+    "location": "Dubai, United Arab Emirates",
+    "timeZone": "Asia/Dubai"
+  },
+  "OTHH": {
+    "name": "Hamad International Airport",
+    "location": "Doha, Qatar",
+    "timeZone": "Asia/Qatar"
+  },
+  "OERK": {
+    "name": "King Khalid International Airport",
+    "location": "Riyadh, Saudi Arabia",
+    "timeZone": "Asia/Riyadh"
+  },
+  "LTFM": {
+    "name": "Istanbul Airport",
+    "location": "Istanbul, Türkiye",
+    "timeZone": "Europe/Istanbul"
+  },
+  "EGLL": {
+    "name": "Heathrow Airport",
+    "location": "London, United Kingdom",
+    "timeZone": "Europe/London"
+  },
+  "EGKK": {
+    "name": "Gatwick Airport",
+    "location": "London, United Kingdom",
+    "timeZone": "Europe/London"
+  },
+  "EGVN": {
+    "name": "RAF Brize Norton",
+    "location": "Brize Norton, United Kingdom",
+    "timeZone": "Europe/London"
+  },
+  "ETAR": {
+    "name": "Ramstein Air Base",
+    "location": "Ramstein, Germany",
+    "timeZone": "Europe/Berlin"
+  },
+  "ETAD": {
+    "name": "Spangdahlem Air Base",
+    "location": "Spangdahlem, Germany",
+    "timeZone": "Europe/Berlin"
+  },
+  "EDDF": {
+    "name": "Frankfurt Airport",
+    "location": "Frankfurt, Germany",
+    "timeZone": "Europe/Berlin"
+  },
+  "LFPG": {
+    "name": "Charles de Gaulle Airport",
+    "location": "Paris, France",
+    "timeZone": "Europe/Paris"
+  },
+  "LEMD": {
+    "name": "Adolfo Suárez Madrid-Barajas Airport",
+    "location": "Madrid, Spain",
+    "timeZone": "Europe/Madrid"
+  },
+  "LIRF": {
+    "name": "Leonardo da Vinci–Fiumicino Airport",
+    "location": "Rome, Italy",
+    "timeZone": "Europe/Rome"
+  },
+  "EHAM": {
+    "name": "Amsterdam Airport Schiphol",
+    "location": "Amsterdam, Netherlands",
+    "timeZone": "Europe/Amsterdam"
+  },
+  "LOWW": {
+    "name": "Vienna International Airport",
+    "location": "Vienna, Austria",
+    "timeZone": "Europe/Vienna"
+  },
+  "LSZH": {
+    "name": "Zurich Airport",
+    "location": "Zurich, Switzerland",
+    "timeZone": "Europe/Zurich"
+  },
+  "YSSY": {
+    "name": "Sydney Kingsford Smith Airport",
+    "location": "Sydney, Australia",
+    "timeZone": "Australia/Sydney"
+  },
+  "YMML": {
+    "name": "Melbourne Airport",
+    "location": "Melbourne, Australia",
+    "timeZone": "Australia/Melbourne"
+  },
+  "NZAA": {
+    "name": "Auckland Airport",
+    "location": "Auckland, New Zealand",
+    "timeZone": "Pacific/Auckland"
+  },
+  "FAOR": {
+    "name": "O. R. Tambo International Airport",
+    "location": "Johannesburg, South Africa",
+    "timeZone": "Africa/Johannesburg"
+  },
+  "FACT": {
+    "name": "Cape Town International Airport",
+    "location": "Cape Town, South Africa",
+    "timeZone": "Africa/Johannesburg"
+  },
+  "SBGR": {
+    "name": "São Paulo/Guarulhos International Airport",
+    "location": "São Paulo, Brazil",
+    "timeZone": "America/Sao_Paulo"
+  },
+  "MMMX": {
+    "name": "Mexico City International Airport",
+    "location": "Mexico City, Mexico",
+    "timeZone": "America/Mexico_City"
+  },
+  "SAE": {
+    "name": "Unresolved airport code from prior list",
+    "location": "Location not confirmed",
+    "timeZone": "Etc/UTC"
+  }
+}

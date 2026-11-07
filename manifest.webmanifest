@@ -1,14 +1,13 @@
 {
-  "id": "./",
   "name": "Pegasus Express Calculator",
   "short_name": "Pegasus Express",
-  "description": "Offline-capable aviation SOE, FRAG, BINGO, and cold weather calculator.",
+  "description": "Offline-capable Pegasus Express Calculator",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#030B16",
-  "theme_color": "#071321",
+  "theme_color": "#061426",
   "icons": [
     {
       "src": "./app-icon-192.png",
