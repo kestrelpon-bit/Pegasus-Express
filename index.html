@@ -31,6 +31,9 @@ button.danger{color:var(--red)}button:disabled{opacity:.35}
 
 @media(max-width:600px){
  main{padding-top:18px}
+ /* iOS Safari can give native date inputs an intrinsic width larger than their grid cell. */
+ #takeoffDate{display:block;width:100%;min-width:0;max-width:100%;box-sizing:border-box;-webkit-appearance:none;appearance:none;text-align:center;padding-left:8px;padding-right:8px;font-variant-numeric:tabular-nums}
+ #soeSection .grid>div{width:100%;min-width:0;max-width:100%}
  .panel{padding:14px;border-radius:14px}
  .grid{grid-template-columns:minmax(0,1fr);gap:10px}.grid.cold-results{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.cold-results .timebig{font-size:18px}
  .grid>div{width:100%;min-width:0}
@@ -395,21 +398,35 @@ function offsetForZone(ms,zone){
  return (Date.UTC(v.year,v.month-1,v.day,v.hour,v.minute,v.second)-ms)/3600000;
 }
 function autoOffset(ms){return airportZone?offsetForZone(ms,airportZone):-new Date(ms).getTimezoneOffset()/60}
+let bundledAirportDbPromise=null;
+function bundledAirportDb(){
+ if(!bundledAirportDbPromise)bundledAirportDbPromise=fetch("./airports-timezones.json").then(r=>{if(!r.ok)throw Error("Bundled airport database unavailable");return r.json()});
+ return bundledAirportDbPromise;
+}
 async function lookupAirport(raw){
  const code=String(raw||"").trim().toUpperCase();const token=++lookupToken;
  if(!code){airportZone=null;airportRecord=null;$("icaoStatus").textContent="Using device time zone.";calculate();return}
  if(!/^[A-Z]{4}$/.test(code)){$("icaoStatus").textContent="Enter a valid 4-letter ICAO code.";airportZone=null;airportRecord=null;calculate();return}
- $("icaoInput").value=code;prof().icao=code;save();$("icaoStatus").textContent="Looking up airport…";
+ $("icaoInput").value=code;prof().icao=code;save();$("icaoStatus").textContent="Checking offline airport database…";
  try{
-  const r=await fetch("https://api.freeairportdb.com/v1/airports/"+encodeURIComponent(code),{headers:{Accept:"application/json"}});
-  if(!r.ok)throw new Error("Airport lookup unavailable (HTTP "+r.status+").");
-  const j=await r.json(),a=j.data;
+  let a=null;
+  try{const db=await bundledAirportDb();a=db[code]||null}catch(_){/* Continue to online fallback if available. */}
   if(token!==lookupToken)return;
-  if(!a||!a.time_zone||String(a.icao||a.code||"").toUpperCase()!==code)throw new Error("ICAO not found or no time zone is available.");
-  // Validate the IANA zone before applying it.
-  new Intl.DateTimeFormat("en-US",{timeZone:a.time_zone});
-  airportZone=a.time_zone;airportRecord=a;
-  $("icaoStatus").textContent=`${a.name||code} · ${a.municipality||a.country_name||""} · ${airportZone}`;
+  if(a){
+   new Intl.DateTimeFormat("en-US",{timeZone:a.timeZone});
+   airportZone=a.timeZone;airportRecord=a;
+   $("icaoStatus").textContent=`${a.name} · ${a.location} · ${airportZone} (offline database)`;
+   calculate();return;
+  }
+  $("icaoStatus").textContent="Not in bundled database; trying online lookup…";
+  const r=await fetch("https://api.freeairportdb.com/v1/airports/"+encodeURIComponent(code),{headers:{Accept:"application/json"}});
+  if(!r.ok)throw new Error("Airport not in offline database; online lookup unavailable (HTTP "+r.status+").");
+  const j=await r.json(),remote=j.data;
+  if(token!==lookupToken)return;
+  if(!remote||!remote.time_zone||String(remote.icao||remote.code||"").toUpperCase()!==code)throw new Error("ICAO not found or no time zone is available.");
+  new Intl.DateTimeFormat("en-US",{timeZone:remote.time_zone});
+  airportZone=remote.time_zone;airportRecord=remote;
+  $("icaoStatus").textContent=`${remote.name||code} · ${remote.municipality||remote.country_name||""} · ${airportZone} (online lookup)`;
   calculate();
  }catch(err){if(token!==lookupToken)return;airportZone=null;airportRecord=null;$("icaoStatus").textContent=err.message+" Using device time zone instead.";calculate()}
 }

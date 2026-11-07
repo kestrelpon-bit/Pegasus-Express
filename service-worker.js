@@ -1,12 +1,13 @@
 /* Pegasus Express Calculator — offline application shell, V4 */
 const CACHE_PREFIX = "pegasus-express-";
-const CACHE_NAME = "pegasus-express-app-shell-v4";
+const CACHE_NAME = "pegasus-express-app-shell-v6";
 
 const APP_SHELL_PATHS = [
   "./index.html",
   "./manifest.webmanifest",
   "./app-icon-192.png",
-  "./app-icon-512.png"
+  "./app-icon-512.png",
+  "./airports-timezones.json"
 ];
 
 function appURL(path) {
