@@ -1,9 +1,10 @@
-const CACHE_NAME = "pegasus-express-v6";
+const CACHE_NAME = "pegasus-express-v8";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
   "./app-icon-192.png",
+  "./apple-touch-icon.png",
   "./app-icon-512.png",
   "./airports-timezones.json"
 ];
