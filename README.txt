@@ -1,24 +1,29 @@
-PEGASUS EXPRESS — GITHUB PAGES PACKAGE
+PEGASUS EXPRESS V6 — GITHUB PAGES PACKAGE
 
-Files
-- index.html: application entry point
+PACKAGE CONTENTS
+- index.html: Pegasus Express V6 application
 - manifest.webmanifest: installable app metadata
-- service-worker.js: offline caching
-- app-icon-192.png / app-icon-512.png: app icons
+- service-worker.js: offline app-shell caching
+- app-icon-192.png and app-icon-512.png: app icons
 
-Deploy
-1. Create or open the GitHub repository.
-2. Upload the CONTENTS of this folder to the repository root (not the folder itself).
-3. In GitHub, open Settings > Pages.
-4. Select Deploy from a branch, choose the main branch and /(root), then Save.
-5. Open the published Pages URL once while online so the service worker can install and cache the app.
+PUBLISH WITH GITHUB PAGES
+1. Download and unzip this package.
+2. Open your GitHub repository.
+3. Upload the CONTENTS of this folder to the repository root.
+   Do not upload the ZIP file or an extra enclosing folder.
+4. In the repository, open Settings > Pages.
+5. Under Build and deployment, select Deploy from a branch.
+6. Select the main branch and /(root), then Save.
+7. Open the published GitHub Pages HTTPS address while online.
 
-Offline use
-- The app must be opened once online from its GitHub Pages HTTPS address before offline use.
-- After the first successful load and service-worker installation, reload once; then the cached app shell is available offline.
-- Browser storage/site data must remain enabled.
+OFFLINE USE
+- Open the published site online at least once.
+- Allow the service worker to install, then reload the page.
+- The app shell will then be available offline in that browser.
+- Browser site data/storage must remain enabled.
+- If you publish a later version, open the site online to receive the update.
 
-Notes
-- This package preserves the supplied V5 HTML application.
-- The service worker caches the app shell and same-origin resources as they are requested.
-- GitHub Pages hosting is HTTPS, which is required for service workers outside localhost.
+VERSION
+This package contains the supplied Pegasus Express Coronet Tracker V6 HTML.
+The HTML application is included as-is; this package adds GitHub Pages and
+offline-app support files.

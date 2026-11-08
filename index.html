@@ -171,8 +171,8 @@ button.danger{color:var(--red)}button:disabled{opacity:.35}
  <button id="showSoeBtn" class="primary" type="button">SOE</button>
  <button id="showFragBtn" type="button">FRAG</button>
  <button id="showBingoBtn" type="button">BINGO</button>
- <button id="showColdBtn" type="button">Cold Wx</button>
  <button id="showTrackerBtn" type="button">CORONET</button>
+ <button id="showColdBtn" type="button">Cold Wx</button>
 </div>
 <div id="soeSection">
 
@@ -334,8 +334,8 @@ button.danger{color:var(--red)}button:disabled{opacity:.35}
   <button type="button" id="trackerResetBtn" class="danger">Reset Data</button>
  </div>
  <div class="tracker-config">
-  <div><label for="trackerArCount">NUMBER OF ARs</label><input id="trackerArCount" type="number" min="1" max="12" step="1" value="8"></div>
-  <div><label for="trackerRcvrCount">NUMBER OF RECEIVERS</label><input id="trackerRcvrCount" type="number" min="1" max="24" step="1" value="8"></div>
+  <div><label for="trackerArCount">NUMBER OF ARs</label><input id="trackerArCount" type="number" min="1" max="12" step="1" value="1"></div>
+  <div><label for="trackerRcvrCount">NUMBER OF RECEIVERS</label><input id="trackerRcvrCount" type="number" min="1" max="24" step="1" value="1"></div>
  </div>
  <div class="tracker-section-title">AR FUEL SUMMARY</div>
  <div class="tracker-table-wrap">
@@ -949,9 +949,9 @@ $("pullBingoBtn").addEventListener("click",()=>{
 
 // Coronet Tracker V2
 const trackerStorageKey="pegasusExpressCoronetTrackerV1"; // Preserve existing locally saved tracker data.
-let trackerState={arCount:8,rcvrCount:8,arNames:[],rcvrNames:[],fragged:[],offloads:[]};
+let trackerState={arCount:1,rcvrCount:1,arNames:[],rcvrNames:[],fragged:[],offloads:[]};
 function trackerBlankZero(value){if(value===null||value===undefined||value==="")return "";const n=Number(value);return Number.isFinite(n)&&n===0?"":value;}
-function trackerDefaultState(arCount=8,rcvrCount=8){
+function trackerDefaultState(arCount=1,rcvrCount=1){
  return {arCount,rcvrCount,
   arNames:Array.from({length:arCount},(_,i)=>`AR ${i+1}`),
   rcvrNames:Array.from({length:rcvrCount},(_,i)=>`RCVR ${i+1}`),
@@ -961,16 +961,16 @@ function trackerDefaultState(arCount=8,rcvrCount=8){
 function trackerLoad(){
  try{
   const saved=JSON.parse(localStorage.getItem(trackerStorageKey)||"null");
-  if(!saved)return trackerDefaultState();
-  const ar=Math.max(1,Math.min(12,Number(saved.arCount)||8));
-  const rc=Math.max(1,Math.min(24,Number(saved.rcvrCount)||8));
+  if(!saved)return trackerDefaultState(1,1);
+  const ar=Math.max(1,Math.min(12,Number(saved.arCount)||1));
+  const rc=Math.max(1,Math.min(24,Number(saved.rcvrCount)||1));
   const base=trackerDefaultState(ar,rc);
   base.arNames=base.arNames.map((v,i)=>saved.arNames?.[i]??v);
   base.rcvrNames=base.rcvrNames.map((v,i)=>saved.rcvrNames?.[i]??v);
   base.fragged=base.fragged.map((v,i)=>trackerBlankZero(saved.fragged?.[i]??v));
   base.offloads=base.offloads.map((row,r)=>row.map((v,c)=>trackerBlankZero(saved.offloads?.[r]?.[c]??v)));
   return base;
- }catch(e){return trackerDefaultState();}
+ }catch(e){return trackerDefaultState(1,1);}
 }
 function trackerSave(){
  try{localStorage.setItem(trackerStorageKey,JSON.stringify(trackerState));}catch(e){}
