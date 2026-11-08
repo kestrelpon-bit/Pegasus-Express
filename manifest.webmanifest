@@ -1,7 +1,7 @@
 {
   "name": "Pegasus Express Calculator",
   "short_name": "Pegasus Express",
-  "description": "Pegasus Express calculator with Coronet Tracker.",
+  "description": "Pegasus Express calculator with SOE, FRAG, BINGO, Cold Wx, and Coronet Tracker.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

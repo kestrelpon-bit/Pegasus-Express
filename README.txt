@@ -1,30 +1,41 @@
-PEGASUS EXPRESS V8 — GITHUB PAGES PACKAGE
+PEGASUS EXPRESS V9 — GITHUB PAGES PACKAGE
 
 PACKAGE CONTENTS
-- index.html: Pegasus Express application
-- manifest.webmanifest: installable app metadata
-- service-worker.js: offline app-shell caching (V8 cache)
-- app-icon-192.png and app-icon-512.png: standard app icons
-- apple-touch-icon.png: dedicated 180 x 180 iPhone Home Screen icon
-- airports-timezones.json: bundled airport ICAO/time-zone database for offline lookup
+- index.html: Pegasus Express V9 calculator with responsive five-tab navigation and update notification
+- manifest.webmanifest: installable app metadata and icon declarations
+- service-worker.js: offline app-shell caching and V9 cache version
+- app-icon-192.png and app-icon-512.png: supplied Pegasus Express artwork
+- apple-touch-icon.png: 180 x 180 iPhone Home Screen icon
+- airports-timezones.json: bundled airport ICAO/time-zone database
 
 PUBLISH WITH GITHUB PAGES
-1. Download and unzip this package.
-2. Open your GitHub repository.
-3. Upload the CONTENTS of this folder to the repository root, replacing files with matching names.
-4. Commit the changes.
-5. Confirm GitHub Pages is publishing from the intended branch and /(root).
+1. Unzip this package.
+2. Upload all package contents to the root of your GitHub repository, replacing files with matching names.
+3. Commit the changes.
+4. Confirm GitHub Pages is publishing from the intended branch and /(root).
+
+V9 TAB LAYOUT
+- SOE, FRAG, BINGO, Cold Wx, and CORONET appear as five equal-width tabs.
+- The tabs remain in one row on desktop and mobile; mobile sizing is reduced to fit the available width.
+- Horizontal tab scrolling is not used.
+
+AUTOMATIC UPDATE BEHAVIOR
+- The app checks for a newer service worker when it opens and when the installed app returns to the foreground.
+- New app-shell files download in the background when online.
+- The current session is not automatically interrupted.
+- When the new service worker takes control, the app displays an "update ready" notice.
+- Tap Reload to load the updated app.
+- The service worker caches the app shell, icons, and airport database for offline use.
+- Existing app data stored by the calculator is not deliberately cleared by the update code.
 
 IPHONE HOME SCREEN ICON
-1. Open the published HTTPS site in Safari (not an in-app browser).
-2. Remove the old Pegasus Express Home Screen shortcut.
-3. Open the site, refresh it, tap Share, then Add to Home Screen.
-4. The dedicated apple-touch-icon.png is declared at 180 x 180 pixels.
+1. Open the published HTTPS site in Safari.
+2. Delete the old Pegasus Express Home Screen shortcut if replacing an earlier icon.
+3. Refresh the website in Safari.
+4. Tap Share, then Add to Home Screen.
+5. The page declares apple-touch-icon.png at 180 x 180 pixels.
 
 OFFLINE USE
-- Open the published site online at least once and reload after the service worker installs.
-- The app shell, icons, and bundled airport time-zone database are cached for offline use.
-- If you publish a later version, open the site online to receive the update.
-
-VERSION
-This package is based on the supplied V7 GitHub package. The application interface and calculator logic are otherwise unchanged.
+- Open the site online at least once and allow the service worker to install.
+- After a release is published, open the app online so it can check for updates.
+- An update notice appears when the new worker takes control; tap Reload to switch the open page to the new version.
