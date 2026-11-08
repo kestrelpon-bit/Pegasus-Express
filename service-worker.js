@@ -1,4 +1,4 @@
-const CACHE_NAME = "pegasus-express-v16-offline-v1";
+const CACHE_NAME = "pegasus-express-v17-offline-v1";
 const APP_SHELL = [
   "./",
   "./index.html",
