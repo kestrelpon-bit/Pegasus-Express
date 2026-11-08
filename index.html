@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#061426"><title>Pegasus Express Calculator V9</title>
+<meta name="theme-color" content="#061426"><title>Pegasus Express Calculator V10</title>
 <style>
 :root{color-scheme:dark;--bg:#030B16;--panel:#0B1929;--row:#102238;--line:#1D344B;--txt:#F4F7FC;--muted:#9AADC2;--green:#63D69A;--red:#F07178;--zulu:#E8B34B}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -279,7 +279,7 @@ button.danger{color:var(--red)}button:disabled{opacity:.35}
  </div>
  <div id="bingoStandardInputs" class="grid">
   <div><label for="bingoFuelBurn">FUEL BURN (PPH)</label><input id="bingoFuelBurn" type="number" min="0" step="0.1" inputmode="decimal" value="12"></div>
-  <div><label for="bingoTravelTime">EST TRAVEL TIME TO DESTINATION (HH+MM)</label><input id="bingoTravelTime" type="text" inputmode="numeric" maxlength="5" value="00+00" placeholder="00+00" autocapitalize="off" spellcheck="false"></div>
+  <div><label for="bingoTravelTime">EST TRAVEL TIME TO DESTINATION (HH+MM)</label><input id="bingoTravelTime" type="text" inputmode="numeric" maxlength="5" placeholder="00+00" autocapitalize="off" spellcheck="false"></div>
   <div><label for="bingoLanding">LANDING FUEL OR RESERVES (K LBS)</label><input id="bingoLanding" type="number" min="0" step="0.1" inputmode="decimal" placeholder="Enter landing fuel"></div>
   <div><label for="bingoDivert">DIVERT FUEL (K LBS)</label><input id="bingoDivert" type="number" min="0" step="0.1" inputmode="decimal" placeholder="Enter divert fuel"></div>
  </div>
@@ -346,8 +346,8 @@ button.danger{color:var(--red)}button:disabled{opacity:.35}
   <button type="button" id="trackerResetBtn" class="danger">Reset Data</button>
  </div>
  <div class="tracker-config">
-  <div><label for="trackerArCount">NUMBER OF ARs</label><input id="trackerArCount" type="number" min="1" max="12" step="1" value="8"></div>
-  <div><label for="trackerRcvrCount">NUMBER OF RECEIVERS</label><input id="trackerRcvrCount" type="number" min="1" max="24" step="1" value="8"></div>
+  <div><label for="trackerArCount">NUMBER OF ARs</label><input id="trackerArCount" type="number" min="0" max="12" step="1" value="1"></div>
+  <div><label for="trackerRcvrCount">NUMBER OF RECEIVERS</label><input id="trackerRcvrCount" type="number" min="0" max="24" step="1" value="1"></div>
  </div>
  <div class="tracker-section-title">AR FUEL SUMMARY</div>
  <div class="tracker-table-wrap">
@@ -368,7 +368,7 @@ button.danger{color:var(--red)}button:disabled{opacity:.35}
  <span style="font-size:13px;color:#F4F7FC">Pegasus Express update ready.</span>
  <button id="applyAppUpdate" type="button" class="primary" style="white-space:nowrap">Reload</button>
 </div>
-<div style="text-align:center;color:#647A91;font-size:10px;letter-spacing:.08em;padding:18px 0 4px">PEGASUS EXPRESS • V9</div>
+<div style="text-align:center;color:#647A91;font-size:10px;letter-spacing:.08em;padding:18px 0 4px">PEGASUS EXPRESS • V10</div>
 
 </main>
 <script>
@@ -968,8 +968,8 @@ $("pullBingoBtn").addEventListener("click",()=>{
 
 // Coronet Tracker V1
 const trackerStorageKey="pegasusExpressCoronetTrackerV1";
-let trackerState={arCount:8,rcvrCount:8,arNames:[],rcvrNames:[],fragged:[],offloads:[]};
-function trackerDefaultState(arCount=8,rcvrCount=8){
+let trackerState={arCount:1,rcvrCount:1,arNames:[],rcvrNames:[],fragged:[],offloads:[]};
+function trackerDefaultState(arCount=1,rcvrCount=1){
  return {arCount,rcvrCount,
   arNames:Array.from({length:arCount},(_,i)=>`AR ${i+1}`),
   rcvrNames:Array.from({length:rcvrCount},(_,i)=>`RCVR ${i+1}`),
@@ -980,8 +980,8 @@ function trackerLoad(){
  try{
   const saved=JSON.parse(localStorage.getItem(trackerStorageKey)||"null");
   if(!saved)return trackerDefaultState();
-  const ar=Math.max(1,Math.min(12,Number(saved.arCount)||8));
-  const rc=Math.max(1,Math.min(24,Number(saved.rcvrCount)||8));
+  const ar=Math.max(0,Math.min(12,Number.isFinite(Number(saved.arCount))?Number(saved.arCount):1));
+  const rc=Math.max(0,Math.min(24,Number.isFinite(Number(saved.rcvrCount))?Number(saved.rcvrCount):1));
   const base=trackerDefaultState(ar,rc);
   base.arNames=base.arNames.map((v,i)=>saved.arNames?.[i]??v);
   base.rcvrNames=base.rcvrNames.map((v,i)=>saved.rcvrNames?.[i]??v);
@@ -1005,23 +1005,66 @@ function trackerRender(){
  const balance=frag.map((v,i)=>v-actual[i]);
  const rows=[
   {label:"FRAGGED OFFLOAD",values:frag,editable:true},
-  {label:"ACTUAL OFFLOAD",values:actual},
+  {label:"ACTUAL OFFLOAD",values:actual,actual:true},
   {label:"BALANCE",values:balance,balance:true}
  ];
- summary.querySelector("tbody").innerHTML=rows.map(row=>`<tr><td class="row-label">${row.label}</td>${row.values.map((v,i)=>`<td>${row.editable?`<input type="number" min="0" step="0.1" inputmode="decimal" aria-label="${row.label} ${trackerState.arNames[i]}" data-tracker-frag="${i}" value="${trackerState.fragged[i]}">`:`<span class="${row.balance?(v<0?"balance-negative":v>0?"balance-positive":""):""}">${trackerFmt(v)}</span>`}</td>`).join("")}<td class="total-cell">${trackerFmt(row.values.reduce((a,b)=>a+b,0))}</td></tr>`).join("");
+ summary.querySelector("tbody").innerHTML=rows.map(row=>`<tr><td class="row-label">${row.label}</td>${row.values.map((v,i)=>`<td>${row.editable?`<input type="number" min="0" step="0.1" inputmode="decimal" aria-label="${row.label} ${trackerState.arNames[i]}" data-tracker-frag="${i}" value="${trackerState.fragged[i]}">`:row.actual?`<span data-tracker-actual="${i}">${trackerFmt(v)}</span>`:`<span data-tracker-balance="${i}" class="${v<0?"balance-negative":v>0?"balance-positive":""}">${trackerFmt(v)}</span>`}</td>`).join("")}<td class="total-cell" data-tracker-summary-total="${row.label}">${trackerFmt(row.values.reduce((a,b)=>a+b,0))}</td></tr>`).join("");
  receivers.querySelector("thead").innerHTML=`<tr><th class="row-label">RECEIVER</th>${trackerState.arNames.map((n,i)=>`<th>${escapeTrackerHtml(n||`AR ${i+1}`)}</th>`).join("")}<th>TOTAL</th></tr>`;
- const receiverRows=trackerState.offloads.map((row,r)=>`<tr><td class="row-label"><input class="name-input" type="text" maxlength="24" aria-label="Receiver ${r+1} name" data-tracker-rcvr-name="${r}" value="${escapeTrackerHtml(trackerState.rcvrNames[r])}"></td>${row.map((value,c)=>`<td><input type="number" min="0" step="0.1" inputmode="decimal" aria-label="${escapeTrackerHtml(trackerState.rcvrNames[r])} offload ${escapeTrackerHtml(trackerState.arNames[c])}" data-tracker-offload="${r},${c}" value="${value}" placeholder="0.0"></td>`).join("")}<td class="total-cell">${trackerFmt(row.reduce((a,b)=>a+trackerNum(b),0))}</td></tr>`).join("");
+ const receiverRows=trackerState.offloads.map((row,r)=>`<tr><td class="row-label"><input class="name-input" type="text" maxlength="24" aria-label="Receiver ${r+1} name" data-tracker-rcvr-name="${r}" value="${escapeTrackerHtml(trackerState.rcvrNames[r])}"></td>${row.map((value,c)=>`<td><input type="number" min="0" step="0.1" inputmode="decimal" aria-label="${escapeTrackerHtml(trackerState.rcvrNames[r])} offload ${escapeTrackerHtml(trackerState.arNames[c])}" data-tracker-offload="${r},${c}" value="${value}" placeholder="0.0"></td>`).join("")}<td class="total-cell" data-tracker-receiver-total="${r}">${trackerFmt(row.reduce((a,b)=>a+trackerNum(b),0))}</td></tr>`).join("");
  const colTotals=Array.from({length:ar},(_,c)=>trackerState.offloads.reduce((sum,row)=>sum+trackerNum(row[c]),0));
  const grand=colTotals.reduce((a,b)=>a+b,0);
- receivers.querySelector("tbody").innerHTML=receiverRows+`<tr><td class="row-label total-cell">TOTAL ACTUAL</td>${colTotals.map(v=>`<td class="total-cell">${trackerFmt(v)}</td>`).join("")}<td class="total-cell">${trackerFmt(grand)}</td></tr>`;
- summary.querySelectorAll("[data-tracker-frag]").forEach(input=>input.addEventListener("input",()=>{trackerState.fragged[Number(input.dataset.trackerFrag)]=input.value;trackerSave();trackerRender();}));
- receivers.querySelectorAll("[data-tracker-offload]").forEach(input=>input.addEventListener("input",()=>{const [r,c]=input.dataset.trackerOffload.split(",").map(Number);trackerState.offloads[r][c]=input.value;trackerSave();trackerRender();}));
- receivers.querySelectorAll("[data-tracker-rcvr-name]").forEach(input=>input.addEventListener("change",()=>{trackerState.rcvrNames[Number(input.dataset.trackerRcvrName)]=input.value.trim()||`RCVR ${Number(input.dataset.trackerRcvrName)+1}`;trackerSave();trackerRender();}));
+ receivers.querySelector("tbody").innerHTML=receiverRows+`<tr><td class="row-label total-cell">TOTAL ACTUAL</td>${colTotals.map((v,c)=>`<td class="total-cell" data-tracker-column-total="${c}">${trackerFmt(v)}</td>`).join("")}<td class="total-cell" data-tracker-grand-total>${trackerFmt(grand)}</td></tr>`;
+ summary.querySelectorAll("[data-tracker-frag]").forEach(input=>input.addEventListener("input",()=>{
+  trackerState.fragged[Number(input.dataset.trackerFrag)]=input.value;
+  trackerSave();trackerRefreshTotals();
+ }));
+ receivers.querySelectorAll("[data-tracker-offload]").forEach(input=>input.addEventListener("input",()=>{
+  const [r,c]=input.dataset.trackerOffload.split(",").map(Number);
+  trackerState.offloads[r][c]=input.value;
+  trackerSave();trackerRefreshTotals();
+ }));
+ receivers.querySelectorAll("[data-tracker-rcvr-name]").forEach(input=>input.addEventListener("change",()=>{
+  trackerState.rcvrNames[Number(input.dataset.trackerRcvrName)]=input.value.trim()||`RCVR ${Number(input.dataset.trackerRcvrName)+1}`;
+  trackerSave();trackerRender();
+ }));
+}
+function trackerRefreshTotals(){
+ const ar=trackerState.arCount,rc=trackerState.rcvrCount;
+ const actual=Array.from({length:ar},(_,c)=>trackerState.offloads.reduce((sum,row)=>sum+trackerNum(row[c]),0));
+ const frag=trackerState.fragged.map(trackerNum);
+ const balance=frag.map((v,i)=>v-actual[i]);
+ actual.forEach((v,i)=>{
+  const el=document.querySelector(`[data-tracker-actual="${i}"]`);
+  if(el)el.textContent=trackerFmt(v);
+ });
+ balance.forEach((v,i)=>{
+  const el=document.querySelector(`[data-tracker-balance="${i}"]`);
+  if(el){el.textContent=trackerFmt(v);el.className=v<0?"balance-negative":v>0?"balance-positive":"";}
+ });
+ const fragTotal=frag.reduce((a,b)=>a+b,0);
+ const actualTotal=actual.reduce((a,b)=>a+b,0);
+ const balanceTotal=balance.reduce((a,b)=>a+b,0);
+ const fragTotalEl=document.querySelector('[data-tracker-summary-total="FRAGGED OFFLOAD"]');
+ const actualTotalEl=document.querySelector('[data-tracker-summary-total="ACTUAL OFFLOAD"]');
+ const balanceTotalEl=document.querySelector('[data-tracker-summary-total="BALANCE"]');
+ if(fragTotalEl)fragTotalEl.textContent=trackerFmt(fragTotal);
+ if(actualTotalEl)actualTotalEl.textContent=trackerFmt(actualTotal);
+ if(balanceTotalEl)balanceTotalEl.textContent=trackerFmt(balanceTotal);
+ trackerState.offloads.forEach((row,r)=>{
+  const el=document.querySelector(`[data-tracker-receiver-total="${r}"]`);
+  if(el)el.textContent=trackerFmt(row.reduce((a,b)=>a+trackerNum(b),0));
+ });
+ actual.forEach((v,c)=>{
+  const el=document.querySelector(`[data-tracker-column-total="${c}"]`);
+  if(el)el.textContent=trackerFmt(v);
+ });
+ const grandEl=document.querySelector("[data-tracker-grand-total]");
+ if(grandEl)grandEl.textContent=trackerFmt(actualTotal);
 }
 function escapeTrackerHtml(value){return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));}
 function trackerResize(){
- const ar=Math.max(1,Math.min(12,Number($("trackerArCount").value)||1));
- const rc=Math.max(1,Math.min(24,Number($("trackerRcvrCount").value)||1));
+ const ar=Math.max(0,Math.min(12,$("trackerArCount").value===""?0:Number($("trackerArCount").value)||0));
+ const rc=Math.max(0,Math.min(24,$("trackerRcvrCount").value===""?0:Number($("trackerRcvrCount").value)||0));
  const next=trackerDefaultState(ar,rc);
  next.arNames=next.arNames.map((v,i)=>trackerState.arNames[i]??v);
  next.rcvrNames=next.rcvrNames.map((v,i)=>trackerState.rcvrNames[i]??v);
@@ -1057,6 +1100,9 @@ $("showTrackerBtn").onclick=()=>showCalculator("tracker");
 $("fragNow").value=zuluNowHHMM();
 setInterval(()=>{if(!fragNowManuallyEdited){$("fragNow").value=zuluNowHHMM();calculateFrag()}},30000);
 
+// On each app launch, seed only the active profile with today's Zulu date.
+// The user can then change it during the session; the change is saved normally.
+prof().date=currentZuluDate();save();
 renderProfiles();renderEditor();showCalculator("soe");$("augmentedToggle").checked=false;updateAugmentedStatus();calculate();calculateFrag();
 
 // Scrolling the page must never increment/decrement calculator number fields.
