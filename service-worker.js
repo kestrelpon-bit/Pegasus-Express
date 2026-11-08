@@ -4,7 +4,8 @@ const APP_SHELL = [
   "./index.html",
   "./manifest.webmanifest",
   "./app-icon-192.png",
-  "./app-icon-512.png"
+  "./app-icon-512.png",
+  "./airports-timezones.json"
 ];
 
 self.addEventListener("install", (event) => {
