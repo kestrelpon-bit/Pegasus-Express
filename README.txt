@@ -1,10 +1,10 @@
-PEGASUS EXPRESS V11 — GITHUB PAGES PACKAGE
+PEGASUS EXPRESS v1.0.0 — GITHUB PAGES PACKAGE
 
 PACKAGE CONTENTS
-- index.html: Pegasus Express V9 calculator with responsive five-tab navigation and update notification
+- index.html: Pegasus Express calculator, release v1.0.0
 - manifest.webmanifest: installable app metadata and icon declarations
-- service-worker.js: offline app-shell caching and V11 cache version
-- app-icon-192.png and app-icon-512.png: supplied Pegasus Express artwork
+- service-worker.js: offline app-shell caching and update detection; cache namespace matches v1.0.0
+- app-icon-192.png and app-icon-512.png: Pegasus Express app artwork
 - apple-touch-icon.png: 180 x 180 iPhone Home Screen icon
 - airports-timezones.json: bundled airport ICAO/time-zone database
 
@@ -13,44 +13,45 @@ PUBLISH WITH GITHUB PAGES
 2. Upload all package contents to the root of your GitHub repository, replacing files with matching names.
 3. Commit the changes.
 4. Confirm GitHub Pages is publishing from the intended branch and /(root).
+5. Open the published app online once so the new service worker can install.
 
-V9 TAB LAYOUT
-- SOE, FRAG, BINGO, Cold Wx, and CORONET appear as five equal-width tabs.
-- The tabs remain in one row on desktop and mobile; mobile sizing is reduced to fit the available width.
-- Horizontal tab scrolling is not used.
+VERSIONING
+- Current release: 1.0.0
+- Future releases use semantic versioning:
+  - Patch (1.0.1): bug fixes and small corrections.
+  - Minor (1.1.0): backward-compatible features and enhancements.
+  - Major (2.0.0): major changes or breaking behavior.
+- The visible app version is maintained in index.html.
+- The service-worker.js cache namespace is updated with each release. The browser detects a changed service worker; it does not compare semantic version numbers.
 
-AUTOMATIC UPDATE BEHAVIOR
-- The app checks for a newer service worker when it opens and when the installed app returns to the foreground.
-- New app-shell files download in the background when online.
+UPDATE BEHAVIOR
+- The app checks for a newer service worker when it opens, when it returns to the foreground, and when CHECK FOR UPDATES is tapped.
+- The browser compares the hosted service-worker.js with the installed worker.
+- When the worker changes, the new app shell is downloaded and installed in the background while online.
 - The current session is not automatically interrupted.
-- When the new service worker takes control, the app displays an "update ready" notice.
-- Tap Reload to load the updated app.
+- When the new worker takes control, the app displays an update-ready notice. Tap Reload when ready.
+- An internet connection is required to check for updates. The installed app remains available offline using its cached files.
 - The service worker caches the app shell, icons, and airport database for offline use.
-- Existing app data stored by the calculator is not deliberately cleared by the update code.
-
-IPHONE HOME SCREEN ICON
-1. Open the published HTTPS site in Safari.
-2. Delete the old Pegasus Express Home Screen shortcut if replacing an earlier icon.
-3. Refresh the website in Safari.
-4. Tap Share, then Add to Home Screen.
-5. The page declares apple-touch-icon.png at 180 x 180 pixels.
+- Existing calculator data is not deliberately cleared by the update code.
 
 OFFLINE USE
 - Open the site online at least once and allow the service worker to install.
 - After a release is published, open the app online so it can check for updates.
-- An update notice appears when the new worker takes control; tap Reload to switch the open page to the new version.
+- If an update notice appears, tap Reload to load the updated app.
 
-V9 DEFAULTS / INPUT FIX
-- Takeoff/LFA date defaults to today's Zulu date when a profile has no saved date.
-- New Coronet Tracker setup starts with 0 ARs and 0 receivers; both controls allow zero.
-- Estimated travel time to destination starts visually blank. A blank value is calculated as 00+00.
-- Coronet editable numeric fields no longer rebuild the table on every keystroke; totals update in place so multi-digit and decimal input can be entered normally.
+IPHONE HOME SCREEN ICON
+1. Open the published HTTPS site in Safari.
+2. If replacing an earlier icon, remove the old Pegasus Express Home Screen shortcut.
+3. Refresh the website in Safari.
+4. Tap Share, then Add to Home Screen.
+5. The page declares apple-touch-icon.png at 180 x 180 pixels.
 
-V10 CHANGE
-- Coronet Tracker defaults to 1 AR and 1 receiver for a fresh setup. Both counts can still be set to 0.
-
-
-V11 CHANGE — ZULU DATE DEFAULT
-- On every app launch, the active SOE profile's DATE (ZULU) field is initialized to the current UTC/Zulu calendar date, even if that profile had an older date saved from a previous session.
-- The date remains editable during the session. A manually selected date is saved and remains in effect until the app is launched again.
-- Other saved profiles are not changed merely by launching the app.
+V1.0.0 INCLUDED FEATURES
+- Five-tab navigation: SOE, FRAG, BINGO, Cold Wx, and CORONET.
+- Coronet Tracker AR summary uses LABELS and TOTAL as the first two columns; both remain frozen during horizontal scrolling.
+- Receiver table's first column remains frozen during horizontal scrolling.
+- Coronet FRAGGED Offload inputs show a faint 0.0 placeholder without treating it as entered data.
+- FRAGGED summary row labels are FRAG, ACTUAL, and BALANCE.
+- Takeoff Time displays a faint 00+00 placeholder when empty; the actual field remains blank until entered.
+- Small CHECK FOR UPDATES control is displayed at the bottom beside the app version.
+- Existing SOE calculator, FRAG, BINGO, Cold Wx, Coronet calculations, profile handling, airport time-zone data, and offline behavior are retained.
