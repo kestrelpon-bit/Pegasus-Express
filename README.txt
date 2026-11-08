@@ -1,9 +1,9 @@
-PEGASUS EXPRESS v1.0.0 — GITHUB PAGES PACKAGE
+PEGASUS EXPRESS v1.0.1 — GITHUB PAGES PACKAGE
 
 PACKAGE CONTENTS
-- index.html: Pegasus Express calculator, release v1.0.0
+- index.html: Pegasus Express calculator, release v1.0.1
 - manifest.webmanifest: installable app metadata and icon declarations
-- service-worker.js: offline app-shell caching and update detection; cache namespace matches v1.0.0
+- service-worker.js: offline app-shell caching and update detection; cache namespace matches v1.0.1
 - app-icon-192.png and app-icon-512.png: Pegasus Express app artwork
 - apple-touch-icon.png: 180 x 180 iPhone Home Screen icon
 - airports-timezones.json: bundled airport ICAO/time-zone database
@@ -16,11 +16,8 @@ PUBLISH WITH GITHUB PAGES
 5. Open the published app online once so the new service worker can install.
 
 VERSIONING
-- Current release: 1.0.0
-- Future releases use semantic versioning:
-  - Patch (1.0.1): bug fixes and small corrections.
-  - Minor (1.1.0): backward-compatible features and enhancements.
-  - Major (2.0.0): major changes or breaking behavior.
+- Current release: 1.0.1
+- This is a patch release based on v1.0.0.
 - The visible app version is maintained in index.html.
 - The service-worker.js cache namespace is updated with each release. The browser detects a changed service worker; it does not compare semantic version numbers.
 
@@ -46,12 +43,17 @@ IPHONE HOME SCREEN ICON
 4. Tap Share, then Add to Home Screen.
 5. The page declares apple-touch-icon.png at 180 x 180 pixels.
 
-V1.0.0 INCLUDED FEATURES
+V1.0.1 CHANGES
+- Retains the original Pegasus Express header and design; no mascot header.
+- AR Fuel Summary BALANCE values are color-coded dynamically: negative red, positive green, and zero yellow.
+- Color coding applies to each AR balance and the TOTAL balance.
+
+RETAINED V1.0.0 FEATURES
 - Five-tab navigation: SOE, FRAG, BINGO, Cold Wx, and CORONET.
 - Coronet Tracker AR summary uses LABELS and TOTAL as the first two columns; both remain frozen during horizontal scrolling.
 - Receiver table's first column remains frozen during horizontal scrolling.
 - Coronet FRAGGED Offload inputs show a faint 0.0 placeholder without treating it as entered data.
 - FRAGGED summary row labels are FRAG, ACTUAL, and BALANCE.
-- Takeoff Time displays a faint 00+00 placeholder when empty; the actual field remains blank until entered.
+- Takeoff Time displays a faint 0000 placeholder when empty; the actual field remains blank until entered.
 - Small CHECK FOR UPDATES control is displayed at the bottom beside the app version.
 - Existing SOE calculator, FRAG, BINGO, Cold Wx, Coronet calculations, profile handling, airport time-zone data, and offline behavior are retained.
