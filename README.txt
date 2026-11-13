@@ -1,59 +1,46 @@
-PEGASUS EXPRESS v1.0.1 — GITHUB PAGES PACKAGE
+PEGASUS EXPRESS CALCULATOR — V1.2.1
+===================================
 
-PACKAGE CONTENTS
-- index.html: Pegasus Express calculator, release v1.0.1
-- manifest.webmanifest: installable app metadata and icon declarations
-- service-worker.js: offline app-shell caching and update detection; cache namespace matches v1.0.1
-- app-icon-192.png and app-icon-512.png: Pegasus Express app artwork
-- apple-touch-icon.png: 180 x 180 iPhone Home Screen icon
-- airports-timezones.json: bundled airport ICAO/time-zone database
+GITHUB PAGES PACKAGE
+--------------------
+This folder contains the complete deployable app package.
 
-PUBLISH WITH GITHUB PAGES
-1. Unzip this package.
-2. Upload all package contents to the root of your GitHub repository, replacing files with matching names.
-3. Commit the changes.
-4. Confirm GitHub Pages is publishing from the intended branch and /(root).
-5. Open the published app online once so the new service worker can install.
+FILES
+-----
+index.html              Main Pegasus Express Calculator app
+service-worker.js       Offline caching and update handling
+manifest.webmanifest    Installable web app settings
+app-icon-192.png        Android / web app icon
+icon-512.png            High-resolution app icon
+apple-touch-icon.png    iPhone / iPad Home Screen icon
 
-VERSIONING
-- Current release: 1.0.1
-- This is a patch release based on v1.0.0.
-- The visible app version is maintained in index.html.
-- The service-worker.js cache namespace is updated with each release. The browser detects a changed service worker; it does not compare semantic version numbers.
+DEPLOY TO GITHUB PAGES
+----------------------
+1. Download and unzip this package.
+2. Open the Pegasus-Express repository on GitHub.
+3. Upload the contents of this folder to the repository root.
+4. Replace the existing files when prompted.
+5. Commit the changes and allow GitHub Pages to finish deploying.
 
-UPDATE BEHAVIOR
-- The app checks for a newer service worker when it opens, when it returns to the foreground, and when CHECK FOR UPDATES is tapped.
-- The browser compares the hosted service-worker.js with the installed worker.
-- When the worker changes, the new app shell is downloaded and installed in the background while online.
-- The current session is not automatically interrupted.
-- When the new worker takes control, the app displays an update-ready notice. Tap Reload when ready.
-- An internet connection is required to check for updates. The installed app remains available offline using its cached files.
-- The service worker caches the app shell, icons, and airport database for offline use.
-- Existing calculator data is not deliberately cleared by the update code.
+IMPORTANT: Upload the files themselves, not the containing folder. The
+index.html, service-worker.js, manifest, and icons must all be together
+in the published repository root. Keep the filenames unchanged.
 
-OFFLINE USE
-- Open the site online at least once and allow the service worker to install.
-- After a release is published, open the app online so it can check for updates.
-- If an update notice appears, tap Reload to load the updated app.
+OFFLINE USE AND UPDATES
+-----------------------
+Open the deployed app once while online so the service worker can install
+and cache the app shell. After that, the app can load offline once cached.
+When a new version is deployed, use CHECK FOR UPDATES or reload after the
+update notice appears. The service worker cache is versioned for V1.2.1.
 
-IPHONE HOME SCREEN ICON
-1. Open the published HTTPS site in Safari.
-2. If replacing an earlier icon, remove the old Pegasus Express Home Screen shortcut.
-3. Refresh the website in Safari.
-4. Tap Share, then Add to Home Screen.
-5. The page declares apple-touch-icon.png at 180 x 180 pixels.
+INSTALL ON IPHONE / IPAD
+-----------------------
+1. Open the GitHub Pages app URL in Safari.
+2. Tap Share.
+3. Choose Add to Home Screen.
+4. Confirm the name and tap Add.
 
-V1.0.1 CHANGES
-- Retains the original Pegasus Express header and design; no mascot header.
-- AR Fuel Summary BALANCE values are color-coded dynamically: negative red, positive green, and zero yellow.
-- Color coding applies to each AR balance and the TOTAL balance.
-
-RETAINED V1.0.0 FEATURES
-- Five-tab navigation: SOE, FRAG, BINGO, Cold Wx, and CORONET.
-- Coronet Tracker AR summary uses LABELS and TOTAL as the first two columns; both remain frozen during horizontal scrolling.
-- Receiver table's first column remains frozen during horizontal scrolling.
-- Coronet FRAGGED Offload inputs show a faint 0.0 placeholder without treating it as entered data.
-- FRAGGED summary row labels are FRAG, ACTUAL, and BALANCE.
-- Takeoff Time displays a faint 0000 placeholder when empty; the actual field remains blank until entered.
-- Small CHECK FOR UPDATES control is displayed at the bottom beside the app version.
-- Existing SOE calculator, FRAG, BINGO, Cold Wx, Coronet calculations, profile handling, airport time-zone data, and offline behavior are retained.
+NOTES
+-----
+The app is a planning and calculation aid. Verify all outputs against
+current approved publications, procedures, and aircraft-specific guidance.

@@ -1,7 +1,6 @@
 {
   "name": "Pegasus Express Calculator",
   "short_name": "Pegasus Express",
-  "description": "Pegasus Express calculator with SOE, FRAG, BINGO, Cold Wx, and Coronet Tracker.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -14,13 +13,8 @@
       "type": "image/png"
     },
     {
-      "src": "./app-icon-512.png",
+      "src": "./icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
-    },
-    {
-      "src": "./apple-touch-icon.png",
-      "sizes": "180x180",
       "type": "image/png"
     }
   ]
