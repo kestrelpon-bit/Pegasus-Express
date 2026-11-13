@@ -383,5 +383,115 @@
     "name": "Unresolved airport code from prior list",
     "location": "Location not confirmed",
     "timeZone": "Etc/UTC"
+  },
+  "OTBH": {
+    "name": "Al Udeid Air Base",
+    "location": "Doha, Qatar",
+    "timeZone": "Asia/Qatar"
+  },
+  "OTBT": {
+    "name": "Dukhan Air Base",
+    "location": "Dukhan, Qatar",
+    "timeZone": "Asia/Qatar"
+  },
+  "OMAM": {
+    "name": "Al Dhafra Air Base",
+    "location": "Abu Dhabi, United Arab Emirates",
+    "timeZone": "Asia/Dubai"
+  },
+  "OMDM": {
+    "name": "Al Minhad Air Base",
+    "location": "Dubai, United Arab Emirates",
+    "timeZone": "Asia/Dubai"
+  },
+  "OKAS": {
+    "name": "Ali Al Salem Air Base",
+    "location": "Kuwait",
+    "timeZone": "Asia/Kuwait"
+  },
+  "OKAJ": {
+    "name": "Ahmad Al Jaber Air Base",
+    "location": "Kuwait",
+    "timeZone": "Asia/Kuwait"
+  },
+  "OBBS": {
+    "name": "Sheikh Isa Air Base",
+    "location": "Sakhir, Bahrain",
+    "timeZone": "Asia/Bahrain"
+  },
+  "OJMS": {
+    "name": "Muwaffaq Salti Air Base",
+    "location": "Azraq, Jordan",
+    "timeZone": "Asia/Amman"
+  },
+  "OEKJ": {
+    "name": "Prince Sultan Air Base",
+    "location": "Al Kharj, Saudi Arabia",
+    "timeZone": "Asia/Riyadh"
+  },
+  "OEDR": {
+    "name": "King Abdulaziz Air Base",
+    "location": "Dhahran, Saudi Arabia",
+    "timeZone": "Asia/Riyadh"
+  },
+  "OEKM": {
+    "name": "King Khalid Air Base",
+    "location": "Khamis Mushait, Saudi Arabia",
+    "timeZone": "Asia/Riyadh"
+  },
+  "OERY": {
+    "name": "Riyadh Air Base",
+    "location": "Riyadh, Saudi Arabia",
+    "timeZone": "Asia/Riyadh"
+  },
+  "OOTH": {
+    "name": "Thumrait Air Base",
+    "location": "Thumrait, Oman",
+    "timeZone": "Asia/Muscat"
+  },
+  "OOMA": {
+    "name": "Masirah Air Base",
+    "location": "Masirah Island, Oman",
+    "timeZone": "Asia/Muscat"
+  },
+  "OOMN": {
+    "name": "Al Musannah Air Base",
+    "location": "Al Musannah, Oman",
+    "timeZone": "Asia/Muscat"
+  },
+  "OOAD": {
+    "name": "RAFO Adam",
+    "location": "Adam, Oman",
+    "timeZone": "Asia/Muscat"
+  },
+  "OOKB": {
+    "name": "Khasab Air Base",
+    "location": "Khasab, Oman",
+    "timeZone": "Asia/Muscat"
+  },
+  "ORAA": {
+    "name": "Al Asad Air Base",
+    "location": "Al Anbar, Iraq",
+    "timeZone": "Asia/Baghdad"
+  },
+  "ORBD": {
+    "name": "Balad Air Base",
+    "location": "Balad, Iraq",
+    "timeZone": "Asia/Baghdad"
+  },
+  "ORAT": {
+    "name": "Al Taqaddum Air Base",
+    "location": "Al Anbar, Iraq",
+    "timeZone": "Asia/Baghdad"
+  },
+  "LTAG": {
+    "name": "Incirlik Air Base",
+    "location": "Adana, Türkiye",
+    "timeZone": "Europe/Istanbul"
+  },
+  "LCRA": {
+    "name": "RAF Akrotiri",
+    "location": "Akrotiri, Cyprus",
+    "timeZone": "Asia/Nicosia"
   }
 }
