@@ -1,90 +1,60 @@
-PEGASUS EXPRESS CALCULATOR — V1.3.15
+PEGASUS EXPRESS CALCULATOR — V1.3.6
 ======================================
 
-THIS IS THE COMPLETE GITHUB PAGES PACKAGE.
-Upload every file in this folder to the ROOT of the repository. Do not omit
-service-worker.js, manifest.webmanifest, or the icon files.
+GITHUB PAGES / OFFLINE PACKAGE
 
-FILES
------
-index.html
-    Main calculator application.
-
-service-worker.js
-    Registers the offline app shell, caches the application and airport
-    database, checks for new releases, and applies updates when the user
-    chooses Reload.
-
-manifest.webmanifest
-    Progressive Web App metadata for Add to Home Screen / installation.
-
-airports-timezones.json
-    Bundled airport/time-zone reference database. Keep beside index.html.
-
-app-icon-192.png
-icon-512.png
-apple-touch-icon.png
-    Android/PWA and Apple home-screen icons.
-
-GITHUB PAGES DEPLOYMENT
------------------------
-1. Open the Pegasus Express GitHub repository.
-2. Upload ALL files in this package to the repository root.
-3. Keep the filenames exactly as provided.
-4. In Settings > Pages, choose Deploy from a branch.
-5. Select the main branch and /(root), then Save.
-6. Wait for GitHub Pages to publish the new release.
-7. Open the site once while online so the new service worker can install.
-8. Test the app offline after the first successful load.
-
-UPDATE BUTTON
--------------
-The CHECK FOR UPDATES button asks the browser to check the registered
-service-worker script for a newer version. When a new worker is installed,
-the app displays an update-ready notice. Selecting Reload activates the
-waiting worker and reloads the calculator with the new release.
-
-If an older service worker is already installed, the browser may need one
-online visit to fetch this new service-worker.js. If the app still shows an
-old version, close all Pegasus Express tabs and reopen the GitHub Pages URL.
-On iPhone/iPad, if the Home Screen copy remains stale, remove that old
-Home Screen shortcut and add the published site again after the first
-successful online visit.
-
-AIRPORT DATABASE
+PACKAGE CONTENTS
 ----------------
-The same expanded airport reference set is used by the standard ICAO lookup
-and the PMCR time-zone lookup. It includes the existing civil references and
-curated publicly identifiable U.S. Air Force, Navy, Army, Marine Corps,
-joint-use, and allied/NATO military airfields.
+index.html                 Pegasus Express Calculator V1.3.6
+service-worker.js          Offline cache and update worker
+manifest.webmanifest       Progressive Web App metadata
+airports-timezones.json    Bundled airport/time-zone reference data
+app-icon-192.png           PWA icon
+icon-512.png               High-resolution PWA icon
+apple-touch-icon.png       Apple Home Screen icon
+README.txt                 Deployment instructions
 
-The list is not a certified or exhaustive inventory of every military
-installation or aerodrome. Some installations do not have a distinct public
-ICAO identifier; some use shared civilian identifiers. Confirm current
-identifiers and time-zone data using authoritative aeronautical information
-before operational use. This app is a planning convenience only and is not
-a substitute for approved flight-planning sources.
+GITHUB DEPLOYMENT
+-----------------
+1. Download and extract this ZIP file.
+2. Open your Pegasus Express GitHub repository.
+3. Upload ALL files from this package to the repository root.
+4. Replace the existing files when GitHub asks.
+5. Commit the changes to the branch configured for GitHub Pages.
+6. In repository Settings > Pages, confirm the correct branch and /(root)
+   (or the existing configured publishing folder).
+7. Open the published HTTPS site while connected to the internet.
 
-DATA REFERENCES
+OFFLINE USE
+-----------
+The first visit requires an internet connection so the service worker can
+install and cache the app shell. After the app has loaded successfully once,
+reopen it while offline to use the cached application.
+
+UPDATE CHECKING
 ---------------
-U.S. Department of Defense MilitaryINSTALLATIONS:
-https://installations.militaryonesource.mil/view-all
+The Check for Updates controls are included on all eight tabs. Update checks
+require HTTPS and an internet connection. The service worker precaches the
+new app shell, activates the new worker, and removes older Pegasus Express
+caches during activation. Reload the app after the update is ready or the
+browser indicates that the new version is available.
 
-FAA Joint Civilian/Military Airports:
-https://www.faa.gov/airports/planning_capacity/joint_use_airports
+AIRPORT DATA
+------------
+The bundled airport/time-zone JSON is a convenience reference for the app.
+It is not an approved flight-planning source or an exhaustive inventory of
+military aerodromes. Verify identifiers, time-zone data, and operational
+information against current authoritative sources before use.
 
-OurAirports public airport data:
-https://ourairports.com/data/
+NOTES
+-----
+- Keep the filenames unchanged.
+- Upload the files to the same repository root; do not upload the ZIP itself
+  as the app.
+- Service workers require HTTPS (GitHub Pages provides HTTPS).
+- Browser caching may delay the visible update. If needed, close the old app
+  tab and reopen the published site.
 
 VERSION
 -------
-V1.3.15 — updater/service-worker package correction.
-Based on the V1.3.13 calculator with no intended calculator logic changes.
-
-UPDATE BUTTON FIX — V1.3.15
----------------------------
-The manual update control is located after the updater script in the HTML.
-The updater now waits for DOMContentLoaded before finding the button and
-status element and attaching its click handler. The button reports status
-messages such as CHECKING FOR UPDATES, YOU'RE UP TO DATE, UPDATE FOUND, or
-an actionable failure/offline message.
+V1.3.6 — SOE footer placement correction and consistent footer across tabs.
