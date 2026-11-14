@@ -1531,373 +1531,126 @@ document.addEventListener("wheel",event=>{
 
 <script>
 (() => {
-  if (!("serviceWorker" in navigator)) return;
-  const notice=document.getElementById("appUpdateNotice");
-  const reloadButton=document.getElementById("applyAppUpdate");
-  const manualButton=document.getElementById("manualUpdateCheck");
-  const status=document.getElementById("manualUpdateStatus");
-  let registration=null, checking=false;
-  const say=(message)=>{if(status)status.textContent=message;};
-  const showReady=()=>{if(notice)notice.style.display="flex";say("UPDATE READY — RELOAD TO APPLY");};
-  const watchWorker=(worker)=>{
-    if(!worker)return;
-    worker.addEventListener("statechange",()=>{
-      if(worker.state==="installed" && navigator.serviceWorker.controller) showReady();
+  const notice = document.getElementById("appUpdateNotice");
+  const reloadButton = document.getElementById("applyAppUpdate");
+  const manualButton = document.getElementById("manualUpdateCheck");
+  const status = document.getElementById("manualUpdateStatus");
+  let registration = null;
+  let checking = false;
+  let reloadAfterActivation = false;
+
+  const say = message => { if (status) status.textContent = message; };
+  const showReady = () => {
+    if (notice) notice.style.display = "flex";
+    say("UPDATE READY — RELOAD TO APPLY");
+  };
+
+  if (!("serviceWorker" in navigator)) {
+    say("OFFLINE UPDATE NOT SUPPORTED IN THIS BROWSER");
+    if (manualButton) manualButton.disabled = true;
+    return;
+  }
+
+  const watchWorker = worker => {
+    if (!worker) return;
+    worker.addEventListener("statechange", () => {
+      if (worker.state === "installed") {
+        if (navigator.serviceWorker.controller) showReady();
+        else say("OFFLINE APP READY");
+      }
     });
   };
-  navigator.serviceWorker.addEventListener("controllerchange",()=>{
-    if(notice)notice.style.display="flex";
+
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (reloadAfterActivation) window.location.reload();
   });
-  if(reloadButton)reloadButton.addEventListener("click",()=>window.location.reload());
-  const check=async()=>{
-    if(!navigator.onLine){say("OFFLINE — CONNECT TO CHECK");return;}
-    if(!registration){say("UPDATE SERVICE NOT READY — TRY AGAIN");return;}
-    if(checking)return;
-    checking=true;
-    if(manualButton)manualButton.disabled=true;
+
+  if (reloadButton) {
+    reloadButton.addEventListener("click", () => {
+      if (registration && registration.waiting) {
+        reloadAfterActivation = true;
+        registration.waiting.postMessage({ type: "SKIP_WAITING" });
+      } else {
+        window.location.reload();
+      }
+    });
+  }
+
+  const checkForUpdates = async () => {
+    if (checking) return;
+    if (!navigator.onLine) {
+      say("OFFLINE — CONNECT TO CHECK");
+      return;
+    }
+    if (!registration) {
+      say("UPDATE SERVICE STARTING — TRY AGAIN");
+      return;
+    }
+
+    checking = true;
+    if (manualButton) manualButton.disabled = true;
     say("CHECKING FOR UPDATES...");
-    try{
-      if(registration.waiting){showReady();return;}
-      if(registration.installing){watchWorker(registration.installing);say("UPDATE DOWNLOADING...");return;}
-      let found=false;
-      const onFound=()=>{found=true;watchWorker(registration.installing);say("UPDATE FOUND — DOWNLOADING...");};
-      registration.addEventListener("updatefound",onFound,{once:true});
+
+    try {
+      if (registration.waiting) {
+        showReady();
+        return;
+      }
+
+      if (registration.installing) {
+        watchWorker(registration.installing);
+        say("UPDATE DOWNLOADING...");
+        return;
+      }
+
+      const updateFound = () => {
+        const worker = registration.installing;
+        if (worker) {
+          watchWorker(worker);
+          say("UPDATE FOUND — DOWNLOADING...");
+        }
+      };
+      registration.addEventListener("updatefound", updateFound, { once: true });
+
       await registration.update();
-      // Give the browser a moment to expose the installing worker after update().
-      await new Promise(resolve=>setTimeout(resolve,500));
-      if(registration.waiting){showReady();}
-      else if(registration.installing){watchWorker(registration.installing);say("UPDATE DOWNLOADING...");}
-      else if(found){say("UPDATE FOUND — FINISHING INSTALL...");}
-      else say("YOU'RE UP TO DATE");
-    }catch(error){say(navigator.onLine?"UNABLE TO CHECK — TRY AGAIN":"OFFLINE — CONNECT TO CHECK");}
-    finally{checking=false;if(manualButton)manualButton.disabled=false;}
+
+      if (registration.waiting) {
+        showReady();
+      } else if (registration.installing) {
+        watchWorker(registration.installing);
+        say("UPDATE DOWNLOADING...");
+      } else {
+        say("YOU'RE UP TO DATE");
+      }
+    } catch (error) {
+      say(navigator.onLine ? "UNABLE TO CHECK — TRY AGAIN" : "OFFLINE — CONNECT TO CHECK");
+    } finally {
+      checking = false;
+      if (manualButton) manualButton.disabled = false;
+    }
   };
-  if(manualButton)manualButton.addEventListener("click",check);
-  window.addEventListener("load",async()=>{
-    try{
-      registration=await navigator.serviceWorker.register("./service-worker.js",{updateViaCache:"none"});
-      if(registration.waiting)showReady();
-      if(registration.installing)watchWorker(registration.installing);
-      registration.addEventListener("updatefound",()=>watchWorker(registration.installing));
-      await check();
-    }catch(error){say("UPDATE SERVICE UNAVAILABLE");}
+
+  if (manualButton) manualButton.addEventListener("click", checkForUpdates);
+
+  window.addEventListener("load", async () => {
+    try {
+      registration = await navigator.serviceWorker.register("./service-worker.js", {
+        scope: "./",
+        updateViaCache: "none"
+      });
+      if (registration.waiting) showReady();
+      if (registration.installing) watchWorker(registration.installing);
+      registration.addEventListener("updatefound", () => watchWorker(registration.installing));
+      await checkForUpdates();
+    } catch (error) {
+      say("UPDATE SERVICE UNAVAILABLE — RELOAD THE APP");
+    }
   });
-})();
-// CREW TEXT — direct crew assignment entry with explicit clear control.
-(()=>{
- const $c=id=>document.getElementById(id), storageKey="pegasusExpressCrewAssignmentsV1";
- const baseDefaults=["Secrets","Crew Bus / Stratus","1801","Wx / NOTAMS / BASH","AR Data","SII","Stabilized approach","Missed Approach brief","T/G brief"];
- const jetDefaults=["TO","Right Seat Pre","Left Seat Pre","Secrets","Walk around","Forms","Form F / Stratus"];
- let crewState={base:baseDefaults.map(name=>({name,who:""})),jet:jetDefaults.map(name=>({name,who:""})),stops:[]};
- const normalizeDutyList=(items,fallback)=>Array.isArray(items)?items.map((item,i)=>({name:String(item?.name??fallback[i]?.name??""),who:(String(item?.who??"").trim().toLowerCase()==="crew member"?"":String(item?.who??""))})):fallback;
- try{const saved=JSON.parse(localStorage.getItem(storageKey)||"null");if(saved){crewState.base=normalizeDutyList(saved.base,crewState.base);crewState.jet=normalizeDutyList(saved.jet,crewState.jet);crewState.stops=Array.isArray(saved.stops)?saved.stops.filter(st=>st&&String(st.name||"").trim()):[];}}catch(_){ }
- const save=()=>{try{localStorage.setItem(storageKey,JSON.stringify(crewState))}catch(_){}};
- // One-time migration: remove any crew names that were previously stored as defaults
- // (for example, "pon") while preserving duty names and user-created stop data.
- const crewAssignmentMigrationKey=storageKey+"_clearLegacyDefaultAssignments_v1";
- try{
-  if(localStorage.getItem(crewAssignmentMigrationKey)!=="1"){
-   [...crewState.base,...crewState.jet].forEach(d=>{d.who="";});
-   save();
-   localStorage.setItem(crewAssignmentMigrationKey,"1");
-  }
- }catch(_){}
- const escCrew=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
- function renderDuties(which){const host=$c(which==="base"?"crewBaseDuties":"crewJetDuties");host.innerHTML=crewState[which].map((d,i)=>`<div class="crew-duty-row" data-index="${i}"><input data-duty-name value="${escCrew(d.name)}" aria-label="Duty"><input data-duty-who value="${escCrew(d.who)}" placeholder="Crew Member" aria-label="Crew member"><button type="button" class="danger fit" data-remove-duty="${i}" aria-label="Remove duty">×</button></div>`).join("");
- host.querySelectorAll("[data-duty-name],[data-duty-who]").forEach(el=>el.addEventListener("input",()=>{const d=crewState[which][Number(el.closest("[data-index]").dataset.index)];d[el.hasAttribute("data-duty-name")?"name":"who"]=el.value;save()}));
- host.querySelectorAll("[data-remove-duty]").forEach(btn=>btn.addEventListener("click",()=>{crewState[which].splice(Number(btn.dataset.removeDuty),1);save();renderDuties(which)}));}
- function renderStops(){const host=$c("crewStops");host.innerHTML=crewState.stops.map((st,i)=>`<div class="crew-stop-row" data-stop="${i}"><input data-stop-name value="${escCrew(st.name||"")}" placeholder="Stop / ICAO"><input data-stop-detail value="${escCrew(st.detail||"")}" placeholder="Details (optional)"><button type="button" class="danger fit" data-remove-stop="${i}">Remove</button></div>`).join("");host.querySelectorAll("[data-stop-name],[data-stop-detail]").forEach(el=>el.addEventListener("input",()=>{const st=crewState.stops[Number(el.closest("[data-stop]").dataset.stop)];st[el.hasAttribute("data-stop-name")?"name":"detail"]=el.value;save()}));host.querySelectorAll("[data-remove-stop]").forEach(b=>b.addEventListener("click",()=>{crewState.stops.splice(Number(b.dataset.removeStop),1);save();renderStops()}));}
- function val(id){return $c(id).value.trim()}
- function rawCrewDigits(id){return $c(id).value.replace(/\D/g,"").slice(0,8)}
- function durationFromTimes(){
-  const pick=id=>{const d=rawCrewDigits(id);return d.length>=4?Number(d.slice(0,2))*60+Number(d.slice(2,4)):null};
-  const a=pick("crewTakeoff"),b=pick("crewLanding");if(a===null||b===null)return "";
-  let mins=b-a;if(mins<0)mins+=1440;
-  let hours=Math.floor(mins/60),rem=mins%60,decimal;
-  if(rem===0)decimal=0;else if(rem<=2)decimal=0;else if(rem<=8)decimal=1;else if(rem<=14)decimal=2;else if(rem<=20)decimal=3;else if(rem<=26)decimal=4;else if(rem<=33)decimal=5;else if(rem<=39)decimal=6;else if(rem<=45)decimal=7;else if(rem<=51)decimal=8;else if(rem<=57)decimal=9;else{hours++;decimal=0;}
-  return `${hours}.${decimal}`;
- }
- function formatCrewTime(el){
-  const before=el.value.slice(0,el.selectionStart||0);
-  const digitsBefore=(before.match(/\d/g)||[]).length;
-  const digits=el.value.replace(/\D/g,"").slice(0,8);
-  let formatted=digits;
-  if(digits.length>4)formatted=`${digits.slice(0,4)}L / ${digits.slice(4)}`;
-  else if(digits.length===4)formatted=`${digits}L / `;
-  if(digits.length===8)formatted=`${digits.slice(0,4)}L / ${digits.slice(4)}Z`;
-  el.value=formatted;
-  // Restore the caret by digit position so inserted separators never steal keystrokes.
-  let pos=0,count=0;
-  while(pos<formatted.length&&count<digitsBefore){if(/\d/.test(formatted[pos]))count++;pos++;}
-  if(digitsBefore>=4&&digits.length>=4)pos=Math.max(pos,formatted.indexOf("L / ")+4);
-  try{el.setSelectionRange(pos,pos)}catch(_){}
- }
- function updateDuration(){ $c("crewDuration").value=durationFromTimes(); }
- ["crewTakeoff","crewLanding"].forEach(id=>{
-  const el=$c(id);
-  el.addEventListener("input",()=>{formatCrewTime(el);updateDuration()});
-  el.addEventListener("paste",()=>requestAnimationFrame(()=>{formatCrewTime(el);updateDuration()}));
- });
- updateDuration();
- async function makeSoeImage(){
-  // Recalculate immediately before capture so the schedule is never dependent
-  // on whether the user visited the SOE tab first.
-  if(typeof calculate!="function")throw Error("SOE calculator is unavailable.");
-  calculate();
-  await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
-  const source=$c("output");
-  if(!source)throw Error("The SOE output panel could not be found.");
-  const eventRows=[...source.querySelectorAll(":scope > .event")];
-  if(!eventRows.length)throw Error("No calculated SOE events were found. Check the SOE takeoff inputs and profile.");
-
-  // Temporarily expose hidden SOE ancestors off-screen. This lets Safari
-  // measure the same rendered elements without changing the visible tab.
-  const changed=[];
-  changed.push({node:source,wasHidden:source.classList.contains("hidden"),oldStyle:source.getAttribute("style")});
-  source.style.setProperty("width","560px","important");
-  source.style.setProperty("max-width","calc(100vw - 32px)","important");
-  source.style.setProperty("margin-left","auto","important");
-  source.style.setProperty("margin-right","auto","important");
-  source.style.setProperty("box-sizing","border-box","important");
-  for(let node=source;node&&node!==document.body;node=node.parentElement){
-   const style=getComputedStyle(node),hidden=node.classList?.contains("hidden")||style.display==="none";
-   if(hidden){
-    changed.push({node,wasHidden:node.classList.contains("hidden"),oldStyle:node.getAttribute("style")});
-    node.classList.remove("hidden");
-    node.style.setProperty("display","block","important");
-    node.style.setProperty("visibility","visible","important");
-    node.style.setProperty("position","absolute","important");
-    node.style.setProperty("left","-12000px","important");
-    node.style.setProperty("top","0","important");
-   }
-  }
-  try{
-   await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
-   const rect=source.getBoundingClientRect();
-   const width=Math.max(320,Math.ceil(Math.max(rect.width,source.scrollWidth)));
-   const height=Math.max(80,Math.ceil(Math.max(rect.height,source.scrollHeight)));
-   if(!Number.isFinite(width)||!Number.isFinite(height)||!eventRows.length)throw Error("The SOE schedule could not be measured.");
-   const scale=2,pad=16,headerHeight=142,canvas=document.createElement("canvas");
-   canvas.width=(width+pad*2)*scale;canvas.height=(height+pad*2+headerHeight)*scale;
-   const ctx=canvas.getContext("2d");if(!ctx)throw Error("This browser cannot create an image canvas.");
-   ctx.scale(scale,scale);
-   const rootStyle=getComputedStyle(source);
-   ctx.fillStyle="#030B16";
-   ctx.fillRect(0,0,width+pad*2,height+pad*2+headerHeight);
-   // Match the reference layout while using the live SOE profile/date values.
-   const profileName=$c("profileSelect")?.selectedOptions?.[0]?.textContent?.trim()||"SOE";
-   const dateValue=$c("takeoffDate")?.value||"";
-   const dateLabel=dateValue?`DATE: ${dateValue} ZULU`:"DATE: ZULU";
-   const augmented=$c("augmentedToggle")?.checked?"  •  AUGMENTED":"";
-   ctx.textBaseline="alphabetic";
-   ctx.fillStyle="#F4F7FC";ctx.font="800 28px -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif";
-   ctx.fillText("PEGASUS EXPRESS  |  SOE",pad,45);
-   ctx.fillStyle="#8FB7D8";ctx.font="800 22px -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif";
-   ctx.fillText(profileName.toUpperCase(),pad,88);
-   ctx.fillStyle="#B7C7D8";ctx.font="500 15px -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif";
-   ctx.fillText(dateLabel+augmented,pad,122);
-   ctx.fillStyle="#29445D";ctx.fillRect(pad,141,width,1.5);
-   const baseX=rect.left,baseY=rect.top;
-   const nodes=[source,...source.querySelectorAll("*")];
-   for(const el of nodes){
-    const r=el.getBoundingClientRect(),cs=getComputedStyle(el),x=r.left-baseX+pad,y=r.top-baseY+pad+headerHeight,w=r.width,h=r.height;
-    if(!w||!h||cs.display==="none"||cs.visibility==="hidden")continue;
-    const bg=cs.backgroundColor;
-    if(bg&&bg!=="rgba(0, 0, 0, 0)"){
-     ctx.fillStyle=bg;const radius=Math.min(parseFloat(cs.borderTopLeftRadius)||0,w/2,h/2);
-     if(radius>0&&typeof ctx.roundRect==="function"){ctx.beginPath();ctx.roundRect(x,y,w,h,radius);ctx.fill();}
-     else ctx.fillRect(x,y,w,h);
-    }
-    const bw=Math.max(parseFloat(cs.borderTopWidth)||0,parseFloat(cs.borderRightWidth)||0,parseFloat(cs.borderBottomWidth)||0,parseFloat(cs.borderLeftWidth)||0);
-    if(bw>0){ctx.strokeStyle=cs.borderTopColor||cs.color;ctx.lineWidth=bw;ctx.strokeRect(x+bw/2,y+bw/2,Math.max(0,w-bw),Math.max(0,h-bw));}
-   }
-   // Draw each visible text node at its browser-measured position. Drawing
-   // words individually preserves wrapping and alignment from the live DOM.
-   const walker=document.createTreeWalker(source,NodeFilter.SHOW_TEXT);
-   let textNode;
-   while((textNode=walker.nextNode())){
-    const text=textNode.nodeValue||"";if(!text.trim())continue;
-    const parent=textNode.parentElement;if(!parent)continue;
-    const cs=getComputedStyle(parent);
-    if(cs.display==="none"||cs.visibility==="hidden"||cs.opacity==="0")continue;
-    const fs=parseFloat(cs.fontSize)||14;
-    ctx.fillStyle=cs.color||"#fff";
-    ctx.font=`${cs.fontStyle} ${cs.fontVariant} ${cs.fontWeight} ${fs}px ${cs.fontFamily}`;
-    ctx.textBaseline="alphabetic";
-    const re=/\S+/g;let match;
-    while((match=re.exec(text))){
-     const range=document.createRange();range.setStart(textNode,match.index);range.setEnd(textNode,match.index+match[0].length);
-     for(const wr of range.getClientRects()){
-      ctx.fillText(match[0],wr.left-baseX+pad,wr.top-baseY+pad+headerHeight+wr.height*.78);
-     }
-    }
-   }
-   let png;
-   if(typeof canvas.toBlob==="function"){
-    png=await new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(Error("The browser could not export the SOE image as PNG.")),"image/png"));
-   }else{
-    const data=canvas.toDataURL("image/png");
-    const raw=atob(data.split(",")[1]),bytes=new Uint8Array(raw.length);
-    for(let i=0;i<raw.length;i++)bytes[i]=raw.charCodeAt(i);
-    png=new Blob([bytes],{type:"image/png"});
-   }
-   if(!png||!png.size)throw Error("The SOE image export returned an empty file.");
-   return png;
-  }finally{
-   for(const item of changed.reverse()){
-    if(item.oldStyle===null)item.node.removeAttribute("style");else item.node.setAttribute("style",item.oldStyle);
-    if(item.wasHidden)item.node.classList.add("hidden");
-   }
-  }
- }
- // Shared SOE image export used by both the SOE tab Copy button and Crew Text.
- // The SOE tab copies the same compact PNG that is embedded in Crew Text.
- window.copySoeScheduleImage=async function(){
-  if(!navigator.clipboard||typeof navigator.clipboard.write!=="function"||typeof window.ClipboardItem!=="function"){
-   throw Error("This browser does not support copying PNG images to the clipboard. Use the installed app or a current Safari/Chrome browser over HTTPS.");
-  }
-  const png=await makeSoeImage();
-  if(!png||!png.size||png.type!=="image/png")throw Error("SOE image generation did not return a valid PNG.");
-  await navigator.clipboard.write([new ClipboardItem({"image/png":png})]);
- };
- let latestSoePng=null,latestCrewText="";
- async function generate(){
-  formatCrewTime($c("crewTakeoff"),true);formatCrewTime($c("crewLanding"),true);updateDuration();
-  const callsign=val("crewCallsign"),dep=val("crewDep"),des=val("crewDes");
-  const stopEntries=crewState.stops.map(st=>({name:(st.name||"").trim(),detail:(st.detail||"").trim()})).filter(st=>st.name);
-  const route=[dep,...stopEntries.map(st=>st.detail?`${st.name} (${st.detail})`:st.name),des].filter(Boolean);
-  const lines=[];
-  if(callsign)lines.push(`CREW TEXT - ${callsign}`);
-  const planLines=[];
-  if(route.length)planLines.push(route.join(" - "));
-  if(val("crewTakeoff"))planLines.push(`TO: ${val("crewTakeoff")}`);
-  if(val("crewLanding"))planLines.push(`LAND: ${val("crewLanding")}${val("crewDuration")?` (${val("crewDuration")} hrs)`:""}`);
-  if(planLines.length)lines.push("","🗺️PLAN:",...planLines);
-  const stepLines=crewState.base.filter(d=>d.name.trim()&&d.who.trim()).map(d=>`${d.name.trim()} - ${d.who.trim()}`);
-  if(stepLines.length)lines.push("","👟STEP DUTIES:",...stepLines);
-  const jetLines=crewState.jet.filter(d=>d.name.trim()&&d.who.trim()).map(d=>`${d.name.trim()} - ${d.who.trim()}`);
-  const aircraft=val("crewAircraft");
-  if(aircraft||jetLines.length)lines.push("","✈️JET DUTIES:",...(aircraft?[`Tail ${aircraft}`]:[]),...jetLines);
-  if(val("crewToFuel"))lines.push("",`⛽︎TO Fuel: ${val("crewToFuel")}`);
-  if($c("crewIncludeBingo").checked){const bingoRaw=$c("bingoResult")?.textContent?.trim()||"";const bingoNum=Number.parseFloat(bingoRaw.replace(/[^0-9.\\-]/g,""));if(bingoRaw&&bingoRaw!=="—"&&Number.isFinite(bingoNum)){const bingoDisplay=Number.isInteger(bingoNum)?String(bingoNum):String(Number(bingoNum.toFixed(2)));lines.push("",`⛽️BINGO: ${bingoDisplay}K`)}}
-  if(val("crewNotes"))lines.push("",val("crewNotes"));
-  latestCrewText=lines.join("\n");$c("crewOutput").value=latestCrewText;
-  latestSoePng=null;
-  const wrap=$c("crewSoeImageWrap");wrap.innerHTML="";
-  if($c("crewIncludeSoe").checked){
-   try{latestSoePng=await makeSoeImage();const img=document.createElement("img");img.className="crew-soe-image";img.alt="SOE schedule image with original SOE formatting";img.src=URL.createObjectURL(latestSoePng);img.onerror=()=>{wrap.textContent="SOE image preview failed to load. Generate again or check browser image support."};wrap.appendChild(img)}
-   catch(err){const error=document.createElement("div");error.className="muted";error.style.color="#e8b34b";error.textContent="SOE image could not be generated: "+(err?.message||"Unknown image error");wrap.appendChild(error)}
-  }
- }
- $c("crewAddStop").onclick=()=>{crewState.stops.push({name:"",detail:""});save();renderStops()};
- $c("crewAddBaseDuty").onclick=()=>{crewState.base.push({name:"New duty",who:""});save();renderDuties("base")};
- $c("crewAddJetDuty").onclick=()=>{crewState.jet.push({name:"New duty",who:""});save();renderDuties("jet")};
- $c("crewClearAssignments").onclick=()=>{if(!confirm("Clear all crew names from duty assignments? Duty names will be kept."))return;[...crewState.base,...crewState.jet].forEach(d=>d.who="");save();renderDuties("base");renderDuties("jet")};
- $c("crewGenerate").onclick=()=>{generate().catch(err=>{$c("crewOutput").value="Unable to generate crew text: "+(err?.message||err);console.error("Crew Text generation failed",err);});};
- $c("crewCopy").onclick=async()=>{try{
-  latestCrewText=$c("crewOutput").value;
-  if($c("crewIncludeSoe").checked&&!latestSoePng)throw Error("The SOE image is required but could not be generated. See the image error below.");
-  if(!navigator.clipboard)throw Error("Clipboard access is unavailable. Use HTTPS or the installed app.");
-  if(latestSoePng&&window.ClipboardItem&&navigator.clipboard.write){
-   const dataUrl=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(Error("Could not prepare the SOE image for rich clipboard copy."));reader.readAsDataURL(latestSoePng)});
-   const html=`<html><body><div style="font-family:Arial,sans-serif;white-space:pre-wrap">${escCrew(latestCrewText).replace(/\n/g,"<br>")}</div><br><img alt="SOE schedule" src="${dataUrl}" style="max-width:100%;height:auto"></body></html>`;
-   await navigator.clipboard.write([new ClipboardItem({"text/html":new Blob([html],{type:"text/html"}),"text/plain":new Blob([latestCrewText],{type:"text/plain"})})]);
-  }else if(navigator.clipboard.writeText){
-   await navigator.clipboard.writeText(latestCrewText+(latestSoePng?"\n[SOE image is available in Generated Output; this browser cannot copy rich text and images together.]":""));
-   if(latestSoePng)throw Error("This browser supports text copying but not rich text with an embedded image. The text was copied; use a browser with rich clipboard support to copy both together.");
-  }else{throw Error("Clipboard unavailable")}
-  $c("crewCopy").textContent="Copied";setTimeout(()=>$c("crewCopy").textContent="Copy Crew Text",1600)
- }catch(e){alert("Copy was unavailable: "+(e?.message||e)+". The generated text and SOE image remain available below.")}};
- renderDuties("base");renderDuties("jet");renderStops();
-})();
-
-
-(()=>{
- const $p=id=>document.getElementById(id);
- const basis={departure:"Z",completion:"Z"};
- const zoneRows={departure:$p("pmcrDepartureZoneRow"),completion:$p("pmcrCompletionZoneRow")};
- const phoneTzButtons={departure:$p("pmcrDeparturePhoneTz"),completion:$p("pmcrCompletionPhoneTz")};
- const resolvedZones={departure:Intl.DateTimeFormat().resolvedOptions().timeZone||"UTC",completion:Intl.DateTimeFormat().resolvedOptions().timeZone||"UTC"};
- const manualOffsets={departure:null,completion:null};
- const icaoInputs={departure:$p("pmcrDepartureIcao"),completion:$p("pmcrCompletionIcao")};
- const icaoStatus={departure:$p("pmcrDepartureIcaoStatus"),completion:$p("pmcrCompletionIcaoStatus")};
- const pad=n=>String(n).padStart(2,"0");
- const months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
- const dateStr=d=>`${pad(d.getUTCDate())} ${months[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
- function partsInZone(date,zone){
-  const parts=new Intl.DateTimeFormat("en-GB",{timeZone:zone,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",hourCycle:"h23"}).formatToParts(date);
-  const o={};parts.forEach(p=>{if(p.type!=="literal")o[p.type]=Number(p.value)});return o;
- }
- function offsetHours(date,zone){const p=partsInZone(date,zone);return (Date.UTC(p.year,p.month-1,p.day,p.hour,p.minute,p.second)-Math.floor(date.getTime()/1000)*1000)/3600000;}
- function gmtLabel(zone){const off=offsetHours(new Date(),zone),sign=off>=0?"+":"-",abs=Math.abs(off),h=Math.floor(abs),m=Math.round((abs-h)*60);return `GMT${sign}${h}${m?":"+pad(m):""} — ${zone}`;}
- const fallbackZones=["UTC","Pacific/Honolulu","America/Anchorage","America/Los_Angeles","America/Denver","America/Chicago","America/New_York","America/Puerto_Rico","Europe/London","Europe/Berlin","Europe/Istanbul","Africa/Cairo","Asia/Jerusalem","Asia/Amman","Asia/Qatar","Asia/Dubai","Asia/Riyadh","Asia/Kuwait","Asia/Bahrain","Asia/Muscat","Asia/Karachi","Asia/Kolkata","Asia/Dhaka","Asia/Bangkok","Asia/Singapore","Asia/Manila","Asia/Seoul","Asia/Tokyo","Pacific/Guam","Australia/Perth","Australia/Sydney","Pacific/Auckland"];
- let allZones=[];try{allZones=typeof Intl.supportedValuesOf==="function"?Intl.supportedValuesOf("timeZone"):fallbackZones}catch(_){allZones=fallbackZones;}
- const deviceZone=Intl.DateTimeFormat().resolvedOptions().timeZone||"UTC";
- function zoneFor(which){return manualOffsets[which]===null?resolvedZones[which]:null;}
- function parseOffset(value){const m=value.trim().match(/^([+-])(\d{1,2})$/);if(!m)return null;const n=Number(m[2]);if(n>14)return null;return (m[1]==="-"?-1:1)*n;}
- function localFixedOffsetToUtc(dateValue,timeValue,offset){const [y,m,d]=dateValue.split("-").map(Number),[hh,mm]=timeValue.split(":").map(Number);return new Date(Date.UTC(y,m-1,d,hh-offset,mm));}
- function formatLocal(date,which){if(manualOffsets[which]!==null){const shifted=new Date(date.getTime()+manualOffsets[which]*3600000);return {date:`${pad(shifted.getUTCDate())} ${months[shifted.getUTCMonth()]} ${shifted.getUTCFullYear()}`,time:`${pad(shifted.getUTCHours())}:${pad(shifted.getUTCMinutes())}`};}return fmtLocal(date,resolvedZones[which]);}
- function syncZoneVisibility(){["departure","completion"].forEach(w=>{zoneRows[w].hidden=basis[w]!=="L";});}
- function localInputToUtc(dateValue,timeValue,zone){
-  if(!dateValue||!timeValue)return null;
-  const [y,m,d]=dateValue.split("-").map(Number),[hh,mm]=timeValue.split(":").map(Number),target=Date.UTC(y,m-1,d,hh,mm);
-  let guess=target;
-  for(let i=0;i<6;i++){const p=partsInZone(new Date(guess),zone),represented=Date.UTC(p.year,p.month-1,p.day,p.hour,p.minute,p.second),diff=target-represented;if(!diff)break;guess+=diff;}
-  return new Date(guess);
- }
- function inputUtc(which){
-  const date=$p(which==="departure"?"pmcrDepartureDate":"pmcrCompletionDate").value;
-  const time=$p(which==="departure"?"pmcrDepartureTime":"pmcrCompletionTime").value;
-  if(!date||!time)return null;
-  if(basis[which]==="Z")return new Date(`${date}T${time}:00Z`);
-  return manualOffsets[which]!==null?localFixedOffsetToUtc(date,time,manualOffsets[which]):localInputToUtc(date,time,resolvedZones[which]);
- }
- function fmtLocal(date,zone){const p=partsInZone(date,zone);return {date:`${pad(p.day)} ${months[p.month-1]} ${p.year}`,time:`${pad(p.hour)}:${pad(p.minute)}`};}
- function fmtZulu(date){return {date:dateStr(date),time:`${pad(date.getUTCHours())}:${pad(date.getUTCMinutes())}Z`};}
- function duration(mins){const h=Math.floor(mins/60),m=mins%60;return `${h}:${pad(m)}`;}
- function calculate(){
-  const dep=inputUtc("departure"),end=inputUtc("completion");
-  if(!dep||!end||!Number.isFinite(dep.getTime())||!Number.isFinite(end.getTime())){$p("pmcrOffStation").textContent="—";$p("pmcrTotal").textContent="—";["pmcrEndLocalDate","pmcrEndLocalTime","pmcrEndZuluDate","pmcrEndZuluTime"].forEach(id=>$p(id).textContent="—");$p("pmcrStatus").textContent="Enter departure and completion of duty to calculate PMCR.";return;}
-  const off=Math.round((end-dep)/60000);
-  if(off<0){$p("pmcrOffStation").textContent="—";$p("pmcrTotal").textContent="—";["pmcrEndLocalDate","pmcrEndLocalTime","pmcrEndZuluDate","pmcrEndZuluTime"].forEach(id=>$p(id).textContent="—");$p("pmcrStatus").textContent="Completion of duty cannot be before initial departure.";return;}
-  $p("pmcrOffStation").textContent=duration(off);
-  if(off<960){$p("pmcrTotal").textContent="Not Required";["pmcrEndLocalDate","pmcrEndLocalTime","pmcrEndZuluDate","pmcrEndZuluTime"].forEach(id=>$p(id).textContent="—");$p("pmcrStatus").textContent="Less than 16 hours off station. Minimum PMCR under paragraph 3.1.10.1 is not triggered.";return;}
-  const rest=Math.min(5760,off/3);$p("pmcrTotal").textContent=duration(Math.ceil(rest));
-  const expiry=new Date(end.getTime()+rest*60000),l=formatLocal(expiry,"completion"),z=fmtZulu(expiry);
-  $p("pmcrEndLocalDate").textContent=l.date;$p("pmcrEndLocalTime").textContent=l.time;$p("pmcrEndZuluDate").textContent=z.date;$p("pmcrEndZuluTime").textContent=z.time;
-  $p("pmcrStatus").textContent=`Minimum PMCR calculated at one-third of ${duration(off)} off-station time, capped at 96:00.`;
- }
- let airportDbPromise=null;
- const pmcrAirportDatabase={"KSUU":{"name":"Travis Air Force Base","location":"Fairfield, California","timeZone":"America/Los_Angeles"},"KSFO":{"name":"San Francisco International Airport","location":"San Francisco, California","timeZone":"America/Los_Angeles"},"KOAK":{"name":"Oakland International Airport","location":"Oakland, California","timeZone":"America/Los_Angeles"},"KLAX":{"name":"Los Angeles International Airport","location":"Los Angeles, California","timeZone":"America/Los_Angeles"},"KSAN":{"name":"San Diego International Airport","location":"San Diego, California","timeZone":"America/Los_Angeles"},"KRNO":{"name":"Reno-Tahoe International Airport","location":"Reno, Nevada","timeZone":"America/Los_Angeles"},"KLAS":{"name":"Harry Reid International Airport","location":"Las Vegas, Nevada","timeZone":"America/Los_Angeles"},"KSEA":{"name":"Seattle-Tacoma International Airport","location":"Seattle, Washington","timeZone":"America/Los_Angeles"},"KPDX":{"name":"Portland International Airport","location":"Portland, Oregon","timeZone":"America/Los_Angeles"},"KSMF":{"name":"Sacramento International Airport","location":"Sacramento, California","timeZone":"America/Los_Angeles"},"KPHX":{"name":"Phoenix Sky Harbor International Airport","location":"Phoenix, Arizona","timeZone":"America/Phoenix"},"KDEN":{"name":"Denver International Airport","location":"Denver, Colorado","timeZone":"America/Denver"},"KSLC":{"name":"Salt Lake City International Airport","location":"Salt Lake City, Utah","timeZone":"America/Denver"},"KABQ":{"name":"Albuquerque International Sunport","location":"Albuquerque, New Mexico","timeZone":"America/Denver"},"KDFW":{"name":"Dallas/Fort Worth International Airport","location":"Dallas-Fort Worth, Texas","timeZone":"America/Chicago"},"KIAH":{"name":"George Bush Intercontinental Airport","location":"Houston, Texas","timeZone":"America/Chicago"},"KORD":{"name":"O'Hare International Airport","location":"Chicago, Illinois","timeZone":"America/Chicago"},"KMSP":{"name":"Minneapolis-Saint Paul International Airport","location":"Minneapolis, Minnesota","timeZone":"America/Chicago"},"KMEM":{"name":"Memphis International Airport","location":"Memphis, Tennessee","timeZone":"America/Chicago"},"KSTL":{"name":"St. Louis Lambert International Airport","location":"St. Louis, Missouri","timeZone":"America/Chicago"},"KATL":{"name":"Hartsfield-Jackson Atlanta International Airport","location":"Atlanta, Georgia","timeZone":"America/New_York"},"KMIA":{"name":"Miami International Airport","location":"Miami, Florida","timeZone":"America/New_York"},"KJFK":{"name":"John F. Kennedy International Airport","location":"New York, New York","timeZone":"America/New_York"},"KEWR":{"name":"Newark Liberty International Airport","location":"Newark, New Jersey","timeZone":"America/New_York"},"KBOS":{"name":"Boston Logan International Airport","location":"Boston, Massachusetts","timeZone":"America/New_York"},"KIAD":{"name":"Washington Dulles International Airport","location":"Dulles, Virginia","timeZone":"America/New_York"},"KDCA":{"name":"Ronald Reagan Washington National Airport","location":"Arlington, Virginia","timeZone":"America/New_York"},"KBWI":{"name":"Baltimore/Washington International Airport","location":"Baltimore, Maryland","timeZone":"America/New_York"},"KCHS":{"name":"Charleston International Airport","location":"Charleston, South Carolina","timeZone":"America/New_York"},"KDOV":{"name":"Dover Air Force Base","location":"Dover, Delaware","timeZone":"America/New_York"},"KADW":{"name":"Joint Base Andrews","location":"Camp Springs, Maryland","timeZone":"America/New_York"},"KOFF":{"name":"Offutt Air Force Base","location":"Omaha, Nebraska","timeZone":"America/Chicago"},"KEND":{"name":"Vance Air Force Base","location":"Enid, Oklahoma","timeZone":"America/Chicago"},"KLSV":{"name":"Nellis Air Force Base","location":"Las Vegas, Nevada","timeZone":"America/Los_Angeles"},"KDMA":{"name":"Davis-Monthan Air Force Base","location":"Tucson, Arizona","timeZone":"America/Phoenix"},"KEDW":{"name":"Edwards Air Force Base","location":"Edwards, California","timeZone":"America/Los_Angeles"},"KPMD":{"name":"Palmdale Regional Airport","location":"Palmdale, California","timeZone":"America/Los_Angeles"},"PGUA":{"name":"Andersen Air Force Base","location":"Yigo, Guam","timeZone":"Pacific/Guam"},"PGUM":{"name":"Antonio B. Won Pat International Airport","location":"Tamuning, Guam","timeZone":"Pacific/Guam"},"PHNL":{"name":"Daniel K. Inouye International Airport","location":"Honolulu, Hawaii","timeZone":"Pacific/Honolulu"},"PHIK":{"name":"Hickam Air Force Base","location":"Honolulu, Hawaii","timeZone":"Pacific/Honolulu"},"RJTY":{"name":"Yokota Air Base","location":"Fussa, Japan","timeZone":"Asia/Tokyo"},"RJTT":{"name":"Tokyo Haneda Airport","location":"Tokyo, Japan","timeZone":"Asia/Tokyo"},"RJAA":{"name":"Narita International Airport","location":"Narita, Japan","timeZone":"Asia/Tokyo"},"RODN":{"name":"Kadena Air Base","location":"Okinawa, Japan","timeZone":"Asia/Tokyo"},"RKSO":{"name":"Osan Air Base","location":"Pyeongtaek, South Korea","timeZone":"Asia/Seoul"},"RKSI":{"name":"Incheon International Airport","location":"Incheon, South Korea","timeZone":"Asia/Seoul"},"RKPK":{"name":"Gimhae International Airport","location":"Busan, South Korea","timeZone":"Asia/Seoul"},"VHHH":{"name":"Hong Kong International Airport","location":"Hong Kong","timeZone":"Asia/Hong_Kong"},"WSSS":{"name":"Singapore Changi Airport","location":"Singapore","timeZone":"Asia/Singapore"},"RPLL":{"name":"Ninoy Aquino International Airport","location":"Manila, Philippines","timeZone":"Asia/Manila"},"VTBS":{"name":"Suvarnabhumi Airport","location":"Bangkok, Thailand","timeZone":"Asia/Bangkok"},"VIDP":{"name":"Indira Gandhi International Airport","location":"New Delhi, India","timeZone":"Asia/Kolkata"},"OMDB":{"name":"Dubai International Airport","location":"Dubai, United Arab Emirates","timeZone":"Asia/Dubai"},"OTHH":{"name":"Hamad International Airport","location":"Doha, Qatar","timeZone":"Asia/Qatar"},"OERK":{"name":"King Khalid International Airport","location":"Riyadh, Saudi Arabia","timeZone":"Asia/Riyadh"},"LTFM":{"name":"Istanbul Airport","location":"Istanbul, T\u00fcrkiye","timeZone":"Europe/Istanbul"},"EGLL":{"name":"Heathrow Airport","location":"London, United Kingdom","timeZone":"Europe/London"},"EGKK":{"name":"Gatwick Airport","location":"London, United Kingdom","timeZone":"Europe/London"},"EGVN":{"name":"RAF Brize Norton","location":"Brize Norton, United Kingdom","timeZone":"Europe/London"},"ETAR":{"name":"Ramstein Air Base","location":"Ramstein, Germany","timeZone":"Europe/Berlin"},"ETAD":{"name":"Spangdahlem Air Base","location":"Spangdahlem, Germany","timeZone":"Europe/Berlin"},"EDDF":{"name":"Frankfurt Airport","location":"Frankfurt, Germany","timeZone":"Europe/Berlin"},"LFPG":{"name":"Charles de Gaulle Airport","location":"Paris, France","timeZone":"Europe/Paris"},"LEMD":{"name":"Adolfo Su\u00e1rez Madrid-Barajas Airport","location":"Madrid, Spain","timeZone":"Europe/Madrid"},"LIRF":{"name":"Leonardo da Vinci\u2013Fiumicino Airport","location":"Rome, Italy","timeZone":"Europe/Rome"},"EHAM":{"name":"Amsterdam Airport Schiphol","location":"Amsterdam, Netherlands","timeZone":"Europe/Amsterdam"},"LOWW":{"name":"Vienna International Airport","location":"Vienna, Austria","timeZone":"Europe/Vienna"},"LSZH":{"name":"Zurich Airport","location":"Zurich, Switzerland","timeZone":"Europe/Zurich"},"YSSY":{"name":"Sydney Kingsford Smith Airport","location":"Sydney, Australia","timeZone":"Australia/Sydney"},"YMML":{"name":"Melbourne Airport","location":"Melbourne, Australia","timeZone":"Australia/Melbourne"},"NZAA":{"name":"Auckland Airport","location":"Auckland, New Zealand","timeZone":"Pacific/Auckland"},"FAOR":{"name":"O. R. Tambo International Airport","location":"Johannesburg, South Africa","timeZone":"Africa/Johannesburg"},"FACT":{"name":"Cape Town International Airport","location":"Cape Town, South Africa","timeZone":"Africa/Johannesburg"},"SBGR":{"name":"S\u00e3o Paulo/Guarulhos International Airport","location":"S\u00e3o Paulo, Brazil","timeZone":"America/Sao_Paulo"},"MMMX":{"name":"Mexico City International Airport","location":"Mexico City, Mexico","timeZone":"America/Mexico_City"},"SAE":{"name":"Unresolved airport code from prior list","location":"Location not confirmed","timeZone":"Etc/UTC"},"OTBH":{"name":"Al Udeid Air Base","location":"Doha, Qatar","timeZone":"Asia/Qatar"},"OTBT":{"name":"Dukhan Air Base","location":"Dukhan, Qatar","timeZone":"Asia/Qatar"},"OMAM":{"name":"Al Dhafra Air Base","location":"Abu Dhabi, United Arab Emirates","timeZone":"Asia/Dubai"},"OMDM":{"name":"Al Minhad Air Base","location":"Dubai, United Arab Emirates","timeZone":"Asia/Dubai"},"OKAS":{"name":"Ali Al Salem Air Base","location":"Kuwait","timeZone":"Asia/Kuwait"},"OKAJ":{"name":"Ahmad Al Jaber Air Base","location":"Kuwait","timeZone":"Asia/Kuwait"},"OBBS":{"name":"Sheikh Isa Air Base","location":"Sakhir, Bahrain","timeZone":"Asia/Bahrain"},"OJMS":{"name":"Muwaffaq Salti Air Base","location":"Azraq, Jordan","timeZone":"Asia/Amman"},"OEKJ":{"name":"Prince Sultan Air Base","location":"Al Kharj, Saudi Arabia","timeZone":"Asia/Riyadh"},"OEDR":{"name":"King Abdulaziz Air Base","location":"Dhahran, Saudi Arabia","timeZone":"Asia/Riyadh"},"OEKM":{"name":"King Khalid Air Base","location":"Khamis Mushait, Saudi Arabia","timeZone":"Asia/Riyadh"},"OERY":{"name":"Riyadh Air Base","location":"Riyadh, Saudi Arabia","timeZone":"Asia/Riyadh"},"OOTH":{"name":"Thumrait Air Base","location":"Thumrait, Oman","timeZone":"Asia/Muscat"},"OOMA":{"name":"Masirah Air Base","location":"Masirah Island, Oman","timeZone":"Asia/Muscat"},"OOMN":{"name":"Al Musannah Air Base","location":"Al Musannah, Oman","timeZone":"Asia/Muscat"},"OOAD":{"name":"RAFO Adam","location":"Adam, Oman","timeZone":"Asia/Muscat"},"OOKB":{"name":"Khasab Air Base","location":"Khasab, Oman","timeZone":"Asia/Muscat"},"ORAA":{"name":"Al Asad Air Base","location":"Al Anbar, Iraq","timeZone":"Asia/Baghdad"},"ORBD":{"name":"Balad Air Base","location":"Balad, Iraq","timeZone":"Asia/Baghdad"},"ORAT":{"name":"Al Taqaddum Air Base","location":"Al Anbar, Iraq","timeZone":"Asia/Baghdad"},"LTAG":{"name":"Incirlik Air Base","location":"Adana, T\u00fcrkiye","timeZone":"Europe/Istanbul"},"LCRA":{"name":"RAF Akrotiri","location":"Akrotiri, Cyprus","timeZone":"Asia/Nicosia"}};
- function airportDb(){if(!airportDbPromise)airportDbPromise=Promise.resolve(pmcrAirportDatabase);return airportDbPromise;}
- async function applyIcao(which){
-  const raw=icaoInputs[which].value.trim();
-  if(!raw){icaoStatus[which].textContent="Enter an ICAO code or whole-hour GMT offset.";return;}
-  const offset=parseOffset(raw);
-  if(offset!==null){manualOffsets[which]=offset;resolvedZones[which]="UTC";icaoInputs[which].value=`${offset>=0?"+":""}${offset}`;icaoStatus[which].textContent=`Manual offset: GMT${offset>=0?"+":""}${offset}`;calculate();return;}
-  const code=raw.toUpperCase();icaoInputs[which].value=code;
-  if(!/^[A-Z]{4}$/.test(code)){icaoStatus[which].textContent="Use a four-letter ICAO code or offset such as +9.";return;}
-  try{const db=await airportDb(),a=db[code];if(!a||!a.timeZone)throw Error("ICAO not found in the bundled airport database.");new Intl.DateTimeFormat("en-US",{timeZone:a.timeZone});
-   manualOffsets[which]=null;resolvedZones[which]=a.timeZone;
-   const now=new Date(),off=offsetHours(now,a.timeZone),sign=off>=0?"+":"",abs=Math.abs(off),h=Math.floor(abs),m=Math.round((abs-h)*60);
-   icaoStatus[which].textContent=`${a.name||code} · GMT${sign}${off} · ${a.timeZone}`;calculate();
-  }catch(e){icaoStatus[which].textContent=e.message||"Unable to look up ICAO.";}
- }
- document.querySelectorAll("[data-pmcr-basis]").forEach(btn=>btn.addEventListener("click",()=>{const key=btn.dataset.pmcrBasis;basis[key]=btn.dataset.value;document.querySelectorAll(`[data-pmcr-basis="${key}"]`).forEach(b=>b.classList.toggle("active",b===btn));syncZoneVisibility();calculate();}));
- ["pmcrDepartureDate","pmcrDepartureTime","pmcrCompletionDate","pmcrCompletionTime"].forEach(id=>$p(id).addEventListener("input",calculate));
- ["departure","completion"].forEach(which=>{icaoInputs[which].addEventListener("change",()=>applyIcao(which));icaoInputs[which].addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();applyIcao(which);}});phoneTzButtons[which].addEventListener("click",()=>{manualOffsets[which]=null;resolvedZones[which]=Intl.DateTimeFormat().resolvedOptions().timeZone||"UTC";icaoInputs[which].value="";const off=offsetHours(new Date(),resolvedZones[which]);icaoStatus[which].textContent=`Device time zone · GMT${off>=0?"+":""}${off} · ${resolvedZones[which]}`;calculate();});});
- $p("pmcrClear").addEventListener("click",()=>{["pmcrDepartureDate","pmcrDepartureTime","pmcrCompletionDate","pmcrCompletionTime","pmcrDepartureIcao","pmcrCompletionIcao"].forEach(id=>$p(id).value="");basis.departure="Z";basis.completion="Z";manualOffsets.departure=null;manualOffsets.completion=null;resolvedZones.departure=Intl.DateTimeFormat().resolvedOptions().timeZone||"UTC";resolvedZones.completion=resolvedZones.departure;syncZoneVisibility();document.querySelectorAll("[data-pmcr-basis]").forEach(b=>b.classList.toggle("active",b.dataset.value==="Z"));["departure","completion"].forEach(w=>{icaoStatus[w].textContent="Enter an ICAO code or whole-hour offset (e.g. +9).";});calculate();});
- // Apply the Zulu defaults immediately so local-zone controls are hidden on initial load.
- syncZoneVisibility();
- const now=new Date(),p=partsInZone(now,deviceZone),today=`${p.year}-${pad(p.month)}-${pad(p.day)}`;$p("pmcrDepartureDate").value=today;$p("pmcrCompletionDate").value=today;
- // Load the offline ICAO database for suggestions; selection remains independent for each time block.
- airportDb().then(db=>{$p("pmcrAirportCodes").innerHTML=Object.keys(db).sort().map(code=>`<option value="${code}">`).join("");}).catch(()=>{});
-
 })();
 </script>
 
 <div class="manual-update-wrap">
- <span id="appVersion" class="app-version">PEGASUS EXPRESS • v1.3.7</span>
+ <span id="appVersion" class="app-version">PEGASUS EXPRESS • v1.3.14</span>
  <button id="manualUpdateCheck" type="button" class="manual-update-button">CHECK FOR UPDATES</button>
  <span id="manualUpdateStatus" role="status" aria-live="polite"></span>
 </div>
