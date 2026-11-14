@@ -1,4 +1,4 @@
-PEGASUS EXPRESS CALCULATOR — V1.3.14
+PEGASUS EXPRESS CALCULATOR — V1.3.15
 ======================================
 
 THIS IS THE COMPLETE GITHUB PAGES PACKAGE.
@@ -78,5 +78,13 @@ https://ourairports.com/data/
 
 VERSION
 -------
-V1.3.14 — updater/service-worker package correction.
+V1.3.15 — updater/service-worker package correction.
 Based on the V1.3.13 calculator with no intended calculator logic changes.
+
+UPDATE BUTTON FIX — V1.3.15
+---------------------------
+The manual update control is located after the updater script in the HTML.
+The updater now waits for DOMContentLoaded before finding the button and
+status element and attaching its click handler. The button reports status
+messages such as CHECKING FOR UPDATES, YOU'RE UP TO DATE, UPDATE FOUND, or
+an actionable failure/offline message.

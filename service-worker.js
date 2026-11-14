@@ -1,7 +1,7 @@
-/* Pegasus Express Calculator offline/update worker — V1.3.14 */
+/* Pegasus Express Calculator offline/update worker — V1.3.15 */
 "use strict";
 
-const CACHE_NAME = "pegasus-express-v1.3.14";
+const CACHE_NAME = "pegasus-express-v1.3.15";
 const APP_FILES = [
   "index.html",
   "airports-timezones.json",

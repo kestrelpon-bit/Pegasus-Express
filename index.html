@@ -1531,126 +1531,138 @@ document.addEventListener("wheel",event=>{
 
 <script>
 (() => {
-  const notice = document.getElementById("appUpdateNotice");
-  const reloadButton = document.getElementById("applyAppUpdate");
-  const manualButton = document.getElementById("manualUpdateCheck");
-  const status = document.getElementById("manualUpdateStatus");
-  let registration = null;
-  let checking = false;
-  let reloadAfterActivation = false;
+  // This script is placed before the footer controls in the document.
+  // Wait until the full DOM exists before looking up the update button/status.
+  const initializeUpdater = () => {
+    const notice = document.getElementById("appUpdateNotice");
+    const reloadButton = document.getElementById("applyAppUpdate");
+    const manualButton = document.getElementById("manualUpdateCheck");
+    const status = document.getElementById("manualUpdateStatus");
+    let registration = null;
+    let checking = false;
+    let reloadAfterActivation = false;
 
-  const say = message => { if (status) status.textContent = message; };
-  const showReady = () => {
-    if (notice) notice.style.display = "flex";
-    say("UPDATE READY — RELOAD TO APPLY");
-  };
+    const say = message => {
+      if (status) status.textContent = message;
+    };
+    const showReady = () => {
+      if (notice) notice.style.display = "flex";
+      say("UPDATE READY — RELOAD TO APPLY");
+    };
 
-  if (!("serviceWorker" in navigator)) {
-    say("OFFLINE UPDATE NOT SUPPORTED IN THIS BROWSER");
-    if (manualButton) manualButton.disabled = true;
-    return;
-  }
-
-  const watchWorker = worker => {
-    if (!worker) return;
-    worker.addEventListener("statechange", () => {
-      if (worker.state === "installed") {
-        if (navigator.serviceWorker.controller) showReady();
-        else say("OFFLINE APP READY");
-      }
-    });
-  };
-
-  navigator.serviceWorker.addEventListener("controllerchange", () => {
-    if (reloadAfterActivation) window.location.reload();
-  });
-
-  if (reloadButton) {
-    reloadButton.addEventListener("click", () => {
-      if (registration && registration.waiting) {
-        reloadAfterActivation = true;
-        registration.waiting.postMessage({ type: "SKIP_WAITING" });
-      } else {
-        window.location.reload();
-      }
-    });
-  }
-
-  const checkForUpdates = async () => {
-    if (checking) return;
-    if (!navigator.onLine) {
-      say("OFFLINE — CONNECT TO CHECK");
-      return;
-    }
-    if (!registration) {
-      say("UPDATE SERVICE STARTING — TRY AGAIN");
+    if (!("serviceWorker" in navigator)) {
+      say("SERVICE WORKERS NOT SUPPORTED — UPDATE CHECK UNAVAILABLE");
+      if (manualButton) manualButton.disabled = true;
       return;
     }
 
-    checking = true;
-    if (manualButton) manualButton.disabled = true;
-    say("CHECKING FOR UPDATES...");
-
-    try {
-      if (registration.waiting) {
-        showReady();
-        return;
-      }
-
-      if (registration.installing) {
-        watchWorker(registration.installing);
-        say("UPDATE DOWNLOADING...");
-        return;
-      }
-
-      const updateFound = () => {
-        const worker = registration.installing;
-        if (worker) {
-          watchWorker(worker);
-          say("UPDATE FOUND — DOWNLOADING...");
+    const watchWorker = worker => {
+      if (!worker) return;
+      worker.addEventListener("statechange", () => {
+        if (worker.state === "installed") {
+          if (navigator.serviceWorker.controller) showReady();
+          else say("OFFLINE APP INSTALLED");
+        } else if (worker.state === "redundant") {
+          say("UPDATE INSTALL FAILED — TRY AGAIN");
         }
-      };
-      registration.addEventListener("updatefound", updateFound, { once: true });
+      });
+    };
 
-      await registration.update();
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (reloadAfterActivation) window.location.reload();
+    });
 
-      if (registration.waiting) {
-        showReady();
-      } else if (registration.installing) {
-        watchWorker(registration.installing);
-        say("UPDATE DOWNLOADING...");
-      } else {
-        say("YOU'RE UP TO DATE");
-      }
-    } catch (error) {
-      say(navigator.onLine ? "UNABLE TO CHECK — TRY AGAIN" : "OFFLINE — CONNECT TO CHECK");
-    } finally {
-      checking = false;
-      if (manualButton) manualButton.disabled = false;
+    if (reloadButton) {
+      reloadButton.addEventListener("click", () => {
+        if (registration && registration.waiting) {
+          reloadAfterActivation = true;
+          registration.waiting.postMessage({ type: "SKIP_WAITING" });
+        } else {
+          window.location.reload();
+        }
+      });
     }
+
+    const checkForUpdates = async () => {
+      if (checking) return;
+      if (!navigator.onLine) {
+        say("OFFLINE — CONNECT TO CHECK");
+        return;
+      }
+      if (!registration) {
+        say("UPDATE SERVICE NOT READY — RELOAD AND TRY AGAIN");
+        return;
+      }
+
+      checking = true;
+      if (manualButton) manualButton.disabled = true;
+      say("CHECKING FOR UPDATES...");
+
+      try {
+        if (registration.waiting) {
+          showReady();
+          return;
+        }
+
+        await registration.update();
+
+        if (registration.waiting) {
+          showReady();
+        } else if (registration.installing) {
+          watchWorker(registration.installing);
+          say("UPDATE FOUND — DOWNLOADING...");
+        } else {
+          say("YOU'RE UP TO DATE");
+        }
+      } catch (error) {
+        say(navigator.onLine
+          ? "UPDATE CHECK FAILED — CHECK CONNECTION AND TRY AGAIN"
+          : "OFFLINE — CONNECT TO CHECK");
+      } finally {
+        checking = false;
+        if (manualButton) manualButton.disabled = false;
+      }
+    };
+
+    if (manualButton) {
+      manualButton.addEventListener("click", checkForUpdates);
+    } else {
+      say("UPDATE BUTTON NOT FOUND");
+    }
+
+    (async () => {
+      try {
+        registration = await navigator.serviceWorker.register("./service-worker.js", {
+          scope: "./",
+          updateViaCache: "none"
+        });
+        if (registration.waiting) showReady();
+        if (registration.installing) watchWorker(registration.installing);
+        registration.addEventListener("updatefound", () => {
+          const worker = registration.installing;
+          if (worker) {
+            watchWorker(worker);
+            say("UPDATE FOUND — DOWNLOADING...");
+          }
+        });
+        say("UPDATE CHECK READY");
+        await checkForUpdates();
+      } catch (error) {
+        say("UPDATE SERVICE UNAVAILABLE — RELOAD THE APP");
+      }
+    })();
   };
 
-  if (manualButton) manualButton.addEventListener("click", checkForUpdates);
-
-  window.addEventListener("load", async () => {
-    try {
-      registration = await navigator.serviceWorker.register("./service-worker.js", {
-        scope: "./",
-        updateViaCache: "none"
-      });
-      if (registration.waiting) showReady();
-      if (registration.installing) watchWorker(registration.installing);
-      registration.addEventListener("updatefound", () => watchWorker(registration.installing));
-      await checkForUpdates();
-    } catch (error) {
-      say("UPDATE SERVICE UNAVAILABLE — RELOAD THE APP");
-    }
-  });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeUpdater, { once: true });
+  } else {
+    initializeUpdater();
+  }
 })();
 </script>
 
 <div class="manual-update-wrap">
- <span id="appVersion" class="app-version">PEGASUS EXPRESS • v1.3.14</span>
+ <span id="appVersion" class="app-version">PEGASUS EXPRESS • v1.3.15</span>
  <button id="manualUpdateCheck" type="button" class="manual-update-button">CHECK FOR UPDATES</button>
  <span id="manualUpdateStatus" role="status" aria-live="polite"></span>
 </div>
