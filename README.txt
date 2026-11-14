@@ -1,50 +1,59 @@
-PEGASUS EXPRESS CALCULATOR — V1.2.2
-===================================
-
-COMPLETE GITHUB PAGES PACKAGE
------------------------------
-This folder contains the complete deployable app package, including the
-V1.2.2 application and its install/offline support files.
+PEGASUS EXPRESS CALCULATOR — GITHUB RELEASE
+=============================================
 
 FILES
 -----
-index.html              Main Pegasus Express Calculator app (V1.2.2)
-service-worker.js       Offline caching and update handling (cache V1.2.2)
-manifest.webmanifest    Installable web app settings
-app-icon-192.png        Web app icon
-icon-512.png            High-resolution web app icon
-apple-touch-icon.png    iPhone / iPad Home Screen icon
-.nojekyll               Prevents GitHub Pages Jekyll processing
-README.txt              These deployment instructions
+index.html
+    Main offline-capable application. Keep this file in the repository root.
 
-DEPLOY TO GITHUB PAGES
+airports-timezones.json
+    Bundled airport/time-zone lookup database used by the SOE profile ICAO
+    time-zone lookup. Keep this file beside index.html. The app requests it
+    with a relative path (./airports-timezones.json).
+
+DEPLOYMENT (GITHUB PAGES)
+-------------------------
+1. Create or open the Pegasus-Express GitHub repository.
+2. Upload index.html and airports-timezones.json to the repository root.
+3. In Settings > Pages, select Deploy from a branch.
+4. Select the main branch and /(root), then Save.
+5. Open the published site. Test with the network disconnected after the
+   first load to confirm the app and bundled airport database work offline.
+6. If replacing an existing release, keep the file names exactly as shown.
+
+AIRPORT DATABASE SCOPE
 ----------------------
-1. Download and unzip this package.
-2. Open the Pegasus-Express repository on GitHub.
-3. Upload ALL CONTENTS of this folder to the repository root.
-4. Replace the existing files when prompted.
-5. Commit the changes and allow GitHub Pages to finish deploying.
+The bundled lookup includes the existing civil airport references plus a
+curated set of publicly identifiable U.S. Air Force, Navy, Army, Marine Corps,
+joint-use, and allied/NATO military airfields.
 
-IMPORTANT: Upload the files themselves, not the containing folder. Keep
-all filenames unchanged and together in the published repository root.
+This is NOT a certified or exhaustive list of every military installation or
+every military aerodrome worldwide. Military OneSource explicitly notes that
+its installation directory does not list every installation. Some bases do
+not have a distinct ICAO identifier; some use a shared civilian ICAO code;
+some are not public-use aerodromes; and some identifiers/time-zone mappings
+may change. Entries are provided for convenience in local-time conversion,
+not for navigation, flight planning, clearance, or operational use.
 
-OFFLINE USE AND UPDATES
------------------------
-Open the deployed app once while online so the service worker can install
-and cache the app shell. After that, the app can load offline once cached.
-The service worker cache is versioned for V1.2.2. When a new version is
-deployed, the app's update handling can install the new cached version.
+AIRPORT DATA SOURCES / REFERENCE
+--------------------------------
+- U.S. Department of Defense MilitaryINSTALLATIONS directory:
+  https://installations.militaryonesource.mil/view-all
+  The directory is a useful cross-service installation reference, but it
+  expressly states that it does not list every installation.
+- FAA Joint Civilian/Military Airports:
+  https://www.faa.gov/airports/planning_capacity/joint_use_airports
+- OurAirports public-domain airport data and data dictionary:
+  https://ourairports.com/data/
+  https://ourairports.com/help/data-dictionary.html
 
-INSTALL ON IPHONE / IPAD
-------------------------
-1. Open the GitHub Pages app URL in Safari.
-2. Tap Share.
-3. Choose Add to Home Screen.
-4. Confirm the name and tap Add.
+TIME ZONES
+----------
+Time-zone values use IANA Time Zone Database identifiers (for example,
+America/Los_Angeles and Asia/Tokyo). Verify the ICAO code and local time-zone
+mapping against current authoritative aeronautical information before use.
 
-NOTES
------
-This is the complete static GitHub Pages package. No build step or external
-package installation is required. The app is a planning and calculation aid.
-Verify all outputs against current approved publications, procedures, and
-aircraft-specific guidance.
+VERSION
+-------
+Pegasus Express Calculator V1.3.13 baseline.
+Airport reference database expanded for this GitHub release.

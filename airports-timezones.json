@@ -1,137 +1,152 @@
 {
-  "KSUU": {
-    "name": "Travis Air Force Base",
-    "location": "Fairfield, California",
-    "timeZone": "America/Los_Angeles"
+  "EBBL": {
+    "name": "Kleine Brogel Air Base",
+    "location": "Peer, Belgium",
+    "timeZone": "Europe/Brussels"
   },
-  "KSFO": {
-    "name": "San Francisco International Airport",
-    "location": "San Francisco, California",
-    "timeZone": "America/Los_Angeles"
+  "EBFS": {
+    "name": "Florennes Air Base",
+    "location": "Florennes, Belgium",
+    "timeZone": "Europe/Brussels"
   },
-  "KOAK": {
-    "name": "Oakland International Airport",
-    "location": "Oakland, California",
-    "timeZone": "America/Los_Angeles"
+  "EDDF": {
+    "name": "Frankfurt Airport",
+    "location": "Frankfurt, Germany",
+    "timeZone": "Europe/Berlin"
   },
-  "KLAX": {
-    "name": "Los Angeles International Airport",
-    "location": "Los Angeles, California",
-    "timeZone": "America/Los_Angeles"
+  "EFRO": {
+    "name": "Rovaniemi Airport / Finnish Air Force",
+    "location": "Rovaniemi, Finland",
+    "timeZone": "Europe/Helsinki"
   },
-  "KSAN": {
-    "name": "San Diego International Airport",
-    "location": "San Diego, California",
-    "timeZone": "America/Los_Angeles"
+  "EGKK": {
+    "name": "Gatwick Airport",
+    "location": "London, United Kingdom",
+    "timeZone": "Europe/London"
   },
-  "KRNO": {
-    "name": "Reno-Tahoe International Airport",
-    "location": "Reno, Nevada",
-    "timeZone": "America/Los_Angeles"
+  "EGLL": {
+    "name": "Heathrow Airport",
+    "location": "London, United Kingdom",
+    "timeZone": "Europe/London"
   },
-  "KLAS": {
-    "name": "Harry Reid International Airport",
-    "location": "Las Vegas, Nevada",
-    "timeZone": "America/Los_Angeles"
+  "EGUL": {
+    "name": "RAF Lakenheath",
+    "location": "Lakenheath, United Kingdom",
+    "timeZone": "Europe/London"
   },
-  "KSEA": {
-    "name": "Seattle-Tacoma International Airport",
-    "location": "Seattle, Washington",
-    "timeZone": "America/Los_Angeles"
+  "EGUN": {
+    "name": "RAF Mildenhall",
+    "location": "Mildenhall, United Kingdom",
+    "timeZone": "Europe/London"
   },
-  "KPDX": {
-    "name": "Portland International Airport",
-    "location": "Portland, Oregon",
-    "timeZone": "America/Los_Angeles"
+  "EGVA": {
+    "name": "RAF Fairford",
+    "location": "Fairford, United Kingdom",
+    "timeZone": "Europe/London"
   },
-  "KSMF": {
-    "name": "Sacramento International Airport",
-    "location": "Sacramento, California",
-    "timeZone": "America/Los_Angeles"
+  "EGVN": {
+    "name": "RAF Brize Norton",
+    "location": "Brize Norton, United Kingdom",
+    "timeZone": "Europe/London"
   },
-  "KPHX": {
-    "name": "Phoenix Sky Harbor International Airport",
-    "location": "Phoenix, Arizona",
-    "timeZone": "America/Phoenix"
+  "EGXT": {
+    "name": "RAF Wittering",
+    "location": "Wittering, United Kingdom",
+    "timeZone": "Europe/London"
   },
-  "KDEN": {
-    "name": "Denver International Airport",
-    "location": "Denver, Colorado",
-    "timeZone": "America/Denver"
+  "EHAM": {
+    "name": "Amsterdam Airport Schiphol",
+    "location": "Amsterdam, Netherlands",
+    "timeZone": "Europe/Amsterdam"
   },
-  "KSLC": {
-    "name": "Salt Lake City International Airport",
-    "location": "Salt Lake City, Utah",
-    "timeZone": "America/Denver"
+  "EHEH": {
+    "name": "Eindhoven Air Base",
+    "location": "Eindhoven, Netherlands",
+    "timeZone": "Europe/Amsterdam"
+  },
+  "ENBO": {
+    "name": "Bodø Air Base",
+    "location": "Bodø, Norway",
+    "timeZone": "Europe/Oslo"
+  },
+  "EPBY": {
+    "name": "Bydgoszcz Airport",
+    "location": "Bydgoszcz, Poland",
+    "timeZone": "Europe/Warsaw"
+  },
+  "EPKS": {
+    "name": "Krzesiny Air Base",
+    "location": "Poznań, Poland",
+    "timeZone": "Europe/Warsaw"
+  },
+  "ESIA": {
+    "name": "Såtenäs Air Base",
+    "location": "Såtenäs, Sweden",
+    "timeZone": "Europe/Stockholm"
+  },
+  "ETAD": {
+    "name": "Spangdahlem Air Base",
+    "location": "Spangdahlem, Germany",
+    "timeZone": "Europe/Berlin"
+  },
+  "ETAR": {
+    "name": "Ramstein Air Base",
+    "location": "Ramstein, Germany",
+    "timeZone": "Europe/Berlin"
+  },
+  "ETNN": {
+    "name": "Nörvenich Air Base",
+    "location": "Nörvenich, Germany",
+    "timeZone": "Europe/Berlin"
+  },
+  "ETSA": {
+    "name": "Laupheim Air Base",
+    "location": "Laupheim, Germany",
+    "timeZone": "Europe/Berlin"
+  },
+  "ETSB": {
+    "name": "Büchel Air Base",
+    "location": "Büchel, Germany",
+    "timeZone": "Europe/Berlin"
+  },
+  "ETSI": {
+    "name": "Ingolstadt Manching Airport",
+    "location": "Manching, Germany",
+    "timeZone": "Europe/Berlin"
+  },
+  "FACT": {
+    "name": "Cape Town International Airport",
+    "location": "Cape Town, South Africa",
+    "timeZone": "Africa/Johannesburg"
+  },
+  "FAOR": {
+    "name": "O. R. Tambo International Airport",
+    "location": "Johannesburg, South Africa",
+    "timeZone": "Africa/Johannesburg"
   },
   "KABQ": {
     "name": "Albuquerque International Sunport",
     "location": "Albuquerque, New Mexico",
     "timeZone": "America/Denver"
   },
-  "KDFW": {
-    "name": "Dallas/Fort Worth International Airport",
-    "location": "Dallas-Fort Worth, Texas",
-    "timeZone": "America/Chicago"
-  },
-  "KIAH": {
-    "name": "George Bush Intercontinental Airport",
-    "location": "Houston, Texas",
-    "timeZone": "America/Chicago"
-  },
-  "KORD": {
-    "name": "O'Hare International Airport",
-    "location": "Chicago, Illinois",
-    "timeZone": "America/Chicago"
-  },
-  "KMSP": {
-    "name": "Minneapolis-Saint Paul International Airport",
-    "location": "Minneapolis, Minnesota",
-    "timeZone": "America/Chicago"
-  },
-  "KMEM": {
-    "name": "Memphis International Airport",
-    "location": "Memphis, Tennessee",
-    "timeZone": "America/Chicago"
-  },
-  "KSTL": {
-    "name": "St. Louis Lambert International Airport",
-    "location": "St. Louis, Missouri",
-    "timeZone": "America/Chicago"
+  "KADW": {
+    "name": "Joint Base Andrews",
+    "location": "Camp Springs, Maryland",
+    "timeZone": "America/New_York"
   },
   "KATL": {
     "name": "Hartsfield-Jackson Atlanta International Airport",
     "location": "Atlanta, Georgia",
     "timeZone": "America/New_York"
   },
-  "KMIA": {
-    "name": "Miami International Airport",
-    "location": "Miami, Florida",
-    "timeZone": "America/New_York"
-  },
-  "KJFK": {
-    "name": "John F. Kennedy International Airport",
-    "location": "New York, New York",
-    "timeZone": "America/New_York"
-  },
-  "KEWR": {
-    "name": "Newark Liberty International Airport",
-    "location": "Newark, New Jersey",
-    "timeZone": "America/New_York"
+  "KBAB": {
+    "name": "Beale Air Force Base",
+    "location": "Marysville, California",
+    "timeZone": "America/Los_Angeles"
   },
   "KBOS": {
     "name": "Boston Logan International Airport",
     "location": "Boston, Massachusetts",
-    "timeZone": "America/New_York"
-  },
-  "KIAD": {
-    "name": "Washington Dulles International Airport",
-    "location": "Dulles, Virginia",
-    "timeZone": "America/New_York"
-  },
-  "KDCA": {
-    "name": "Ronald Reagan Washington National Airport",
-    "location": "Arlington, Virginia",
     "timeZone": "America/New_York"
   },
   "KBWI": {
@@ -140,129 +155,439 @@
     "timeZone": "America/New_York"
   },
   "KCHS": {
-    "name": "Charleston International Airport",
+    "name": "Joint Base Charleston",
     "location": "Charleston, South Carolina",
     "timeZone": "America/New_York"
   },
-  "KDOV": {
-    "name": "Dover Air Force Base",
-    "location": "Dover, Delaware",
+  "KCVS": {
+    "name": "Cannon Air Force Base",
+    "location": "Clovis, New Mexico",
+    "timeZone": "America/Denver"
+  },
+  "KDCA": {
+    "name": "Ronald Reagan Washington National Airport",
+    "location": "Arlington, Virginia",
     "timeZone": "America/New_York"
   },
-  "KADW": {
-    "name": "Joint Base Andrews",
-    "location": "Camp Springs, Maryland",
-    "timeZone": "America/New_York"
+  "KDEN": {
+    "name": "Denver International Airport",
+    "location": "Denver, Colorado",
+    "timeZone": "America/Denver"
   },
-  "KOFF": {
-    "name": "Offutt Air Force Base",
-    "location": "Omaha, Nebraska",
+  "KDFW": {
+    "name": "Dallas/Fort Worth International Airport",
+    "location": "Dallas-Fort Worth, Texas",
     "timeZone": "America/Chicago"
-  },
-  "KEND": {
-    "name": "Vance Air Force Base",
-    "location": "Enid, Oklahoma",
-    "timeZone": "America/Chicago"
-  },
-  "KLSV": {
-    "name": "Nellis Air Force Base",
-    "location": "Las Vegas, Nevada",
-    "timeZone": "America/Los_Angeles"
   },
   "KDMA": {
     "name": "Davis-Monthan Air Force Base",
     "location": "Tucson, Arizona",
     "timeZone": "America/Phoenix"
   },
+  "KDOV": {
+    "name": "Dover Air Force Base",
+    "location": "Dover, Delaware",
+    "timeZone": "America/New_York"
+  },
   "KEDW": {
     "name": "Edwards Air Force Base",
     "location": "Edwards, California",
     "timeZone": "America/Los_Angeles"
   },
+  "KEND": {
+    "name": "Vance Air Force Base",
+    "location": "Enid, Oklahoma",
+    "timeZone": "America/Chicago"
+  },
+  "KEWR": {
+    "name": "Newark Liberty International Airport",
+    "location": "Newark, New Jersey",
+    "timeZone": "America/New_York"
+  },
+  "KFAT": {
+    "name": "Fresno Yosemite International Airport / ANG",
+    "location": "Fresno, California",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KFBG": {
+    "name": "Simmons Army Airfield",
+    "location": "Fort Liberty, North Carolina",
+    "timeZone": "America/New_York"
+  },
+  "KFSI": {
+    "name": "Henry Post Army Airfield",
+    "location": "Fort Sill, Oklahoma",
+    "timeZone": "America/Chicago"
+  },
+  "KGRF": {
+    "name": "Gray Army Airfield",
+    "location": "Joint Base Lewis-McChord, Washington",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KHLR": {
+    "name": "Hood Army Airfield",
+    "location": "Fort Cavazos, Texas",
+    "timeZone": "America/Chicago"
+  },
+  "KHRT": {
+    "name": "Hurlburt Field",
+    "location": "Mary Esther, Florida",
+    "timeZone": "America/Chicago"
+  },
+  "KIAB": {
+    "name": "McConnell Air Force Base",
+    "location": "Wichita, Kansas",
+    "timeZone": "America/Chicago"
+  },
+  "KIAD": {
+    "name": "Washington Dulles International Airport",
+    "location": "Dulles, Virginia",
+    "timeZone": "America/New_York"
+  },
+  "KIAH": {
+    "name": "George Bush Intercontinental Airport",
+    "location": "Houston, Texas",
+    "timeZone": "America/Chicago"
+  },
+  "KJFK": {
+    "name": "John F. Kennedy International Airport",
+    "location": "New York, New York",
+    "timeZone": "America/New_York"
+  },
+  "KLAS": {
+    "name": "Harry Reid International Airport",
+    "location": "Las Vegas, Nevada",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KLAX": {
+    "name": "Los Angeles International Airport",
+    "location": "Los Angeles, California",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KLSF": {
+    "name": "Lawson Army Airfield",
+    "location": "Fort Moore, Georgia",
+    "timeZone": "America/New_York"
+  },
+  "KLSV": {
+    "name": "Nellis Air Force Base",
+    "location": "Las Vegas, Nevada",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KMEM": {
+    "name": "Memphis International Airport",
+    "location": "Memphis, Tennessee",
+    "timeZone": "America/Chicago"
+  },
+  "KMIA": {
+    "name": "Miami International Airport",
+    "location": "Miami, Florida",
+    "timeZone": "America/New_York"
+  },
+  "KMSP": {
+    "name": "Minneapolis-Saint Paul International Airport",
+    "location": "Minneapolis, Minnesota",
+    "timeZone": "America/Chicago"
+  },
+  "KNBC": {
+    "name": "Marine Corps Air Station Beaufort",
+    "location": "Beaufort, South Carolina",
+    "timeZone": "America/New_York"
+  },
+  "KNBG": {
+    "name": "Naval Air Station Joint Reserve Base New Orleans",
+    "location": "New Orleans, Louisiana",
+    "timeZone": "America/Chicago"
+  },
+  "KNCA": {
+    "name": "Marine Corps Air Station New River",
+    "location": "Jacksonville, North Carolina",
+    "timeZone": "America/New_York"
+  },
+  "KNFL": {
+    "name": "Naval Air Station Fallon",
+    "location": "Fallon, Nevada",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KNFW": {
+    "name": "Naval Air Station Joint Reserve Base Fort Worth",
+    "location": "Fort Worth, Texas",
+    "timeZone": "America/Chicago"
+  },
+  "KNIP": {
+    "name": "Naval Air Station Jacksonville",
+    "location": "Jacksonville, Florida",
+    "timeZone": "America/New_York"
+  },
+  "KNKT": {
+    "name": "Marine Corps Air Station Cherry Point",
+    "location": "Havelock, North Carolina",
+    "timeZone": "America/New_York"
+  },
+  "KNKX": {
+    "name": "Marine Corps Air Station Miramar",
+    "location": "San Diego, California",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KNMM": {
+    "name": "Naval Air Station Meridian",
+    "location": "Meridian, Mississippi",
+    "timeZone": "America/Chicago"
+  },
+  "KNPA": {
+    "name": "Naval Air Station Pensacola",
+    "location": "Pensacola, Florida",
+    "timeZone": "America/Chicago"
+  },
+  "KNQX": {
+    "name": "Naval Air Station Key West",
+    "location": "Key West, Florida",
+    "timeZone": "America/New_York"
+  },
+  "KNSE": {
+    "name": "Naval Air Station Whiting Field",
+    "location": "Milton, Florida",
+    "timeZone": "America/Chicago"
+  },
+  "KNZY": {
+    "name": "Naval Air Station North Island",
+    "location": "Coronado, California",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KOAK": {
+    "name": "Oakland International Airport",
+    "location": "Oakland, California",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KOFF": {
+    "name": "Offutt Air Force Base",
+    "location": "Omaha, Nebraska",
+    "timeZone": "America/Chicago"
+  },
+  "KORD": {
+    "name": "O'Hare International Airport",
+    "location": "Chicago, Illinois",
+    "timeZone": "America/Chicago"
+  },
+  "KPDX": {
+    "name": "Portland International Airport",
+    "location": "Portland, Oregon",
+    "timeZone": "America/Los_Angeles"
+  },
+  "KPHX": {
+    "name": "Phoenix Sky Harbor International Airport",
+    "location": "Phoenix, Arizona",
+    "timeZone": "America/Phoenix"
+  },
   "KPMD": {
-    "name": "Palmdale Regional Airport",
+    "name": "Air Force Plant 42 / Palmdale",
     "location": "Palmdale, California",
     "timeZone": "America/Los_Angeles"
   },
-  "PGUA": {
-    "name": "Andersen Air Force Base",
-    "location": "Yigo, Guam",
-    "timeZone": "Pacific/Guam"
+  "KPOB": {
+    "name": "Pope Army Airfield",
+    "location": "Fort Liberty, North Carolina",
+    "timeZone": "America/New_York"
   },
-  "PGUM": {
-    "name": "Antonio B. Won Pat International Airport",
-    "location": "Tamuning, Guam",
-    "timeZone": "Pacific/Guam"
+  "KRIV": {
+    "name": "March Air Reserve Base",
+    "location": "Riverside, California",
+    "timeZone": "America/Los_Angeles"
   },
-  "PHNL": {
-    "name": "Daniel K. Inouye International Airport",
-    "location": "Honolulu, Hawaii",
-    "timeZone": "Pacific/Honolulu"
+  "KRNO": {
+    "name": "Reno-Tahoe International Airport",
+    "location": "Reno, Nevada",
+    "timeZone": "America/Los_Angeles"
   },
-  "PHIK": {
-    "name": "Hickam Air Force Base",
-    "location": "Honolulu, Hawaii",
-    "timeZone": "Pacific/Honolulu"
+  "KSAN": {
+    "name": "San Diego International Airport",
+    "location": "San Diego, California",
+    "timeZone": "America/Los_Angeles"
   },
-  "RJTY": {
-    "name": "Yokota Air Base",
-    "location": "Fussa, Japan",
-    "timeZone": "Asia/Tokyo"
+  "KSEA": {
+    "name": "Seattle-Tacoma International Airport",
+    "location": "Seattle, Washington",
+    "timeZone": "America/Los_Angeles"
   },
-  "RJTT": {
-    "name": "Tokyo Haneda Airport",
-    "location": "Tokyo, Japan",
-    "timeZone": "Asia/Tokyo"
+  "KSFO": {
+    "name": "San Francisco International Airport",
+    "location": "San Francisco, California",
+    "timeZone": "America/Los_Angeles"
   },
-  "RJAA": {
-    "name": "Narita International Airport",
-    "location": "Narita, Japan",
-    "timeZone": "Asia/Tokyo"
+  "KSKA": {
+    "name": "Fairchild Air Force Base",
+    "location": "Spokane, Washington",
+    "timeZone": "America/Los_Angeles"
   },
-  "RODN": {
-    "name": "Kadena Air Base",
-    "location": "Okinawa, Japan",
-    "timeZone": "Asia/Tokyo"
+  "KSLC": {
+    "name": "Salt Lake City International Airport",
+    "location": "Salt Lake City, Utah",
+    "timeZone": "America/Denver"
   },
-  "RKSO": {
-    "name": "Osan Air Base",
-    "location": "Pyeongtaek, South Korea",
-    "timeZone": "Asia/Seoul"
+  "KSMF": {
+    "name": "Sacramento International Airport",
+    "location": "Sacramento, California",
+    "timeZone": "America/Los_Angeles"
   },
-  "RKSI": {
-    "name": "Incheon International Airport",
-    "location": "Incheon, South Korea",
-    "timeZone": "Asia/Seoul"
+  "KSTL": {
+    "name": "St. Louis Lambert International Airport",
+    "location": "St. Louis, Missouri",
+    "timeZone": "America/Chicago"
   },
-  "RKPK": {
-    "name": "Gimhae International Airport",
-    "location": "Busan, South Korea",
-    "timeZone": "Asia/Seoul"
+  "KSUU": {
+    "name": "Travis Air Force Base",
+    "location": "Fairfield, California",
+    "timeZone": "America/Los_Angeles"
   },
-  "VHHH": {
-    "name": "Hong Kong International Airport",
-    "location": "Hong Kong",
-    "timeZone": "Asia/Hong_Kong"
+  "KSVN": {
+    "name": "Hunter Army Airfield",
+    "location": "Savannah, Georgia",
+    "timeZone": "America/New_York"
   },
-  "WSSS": {
-    "name": "Singapore Changi Airport",
-    "location": "Singapore",
-    "timeZone": "Asia/Singapore"
+  "KTCM": {
+    "name": "McChord Field",
+    "location": "Joint Base Lewis-McChord, Washington",
+    "timeZone": "America/Los_Angeles"
   },
-  "RPLL": {
-    "name": "Ninoy Aquino International Airport",
-    "location": "Manila, Philippines",
-    "timeZone": "Asia/Manila"
+  "KVPS": {
+    "name": "Eglin Air Force Base",
+    "location": "Valparaiso, Florida",
+    "timeZone": "America/Chicago"
   },
-  "VTBS": {
-    "name": "Suvarnabhumi Airport",
-    "location": "Bangkok, Thailand",
-    "timeZone": "Asia/Bangkok"
+  "KXMR": {
+    "name": "Patrick Space Force Base",
+    "location": "Cocoa Beach, Florida",
+    "timeZone": "America/New_York"
   },
-  "VIDP": {
-    "name": "Indira Gandhi International Airport",
-    "location": "New Delhi, India",
-    "timeZone": "Asia/Kolkata"
+  "LATI": {
+    "name": "Tirana International Airport",
+    "location": "Tirana, Albania",
+    "timeZone": "Europe/Tirane"
+  },
+  "LEMD": {
+    "name": "Adolfo Suárez Madrid-Barajas Airport",
+    "location": "Madrid, Spain",
+    "timeZone": "Europe/Madrid"
+  },
+  "LERT": {
+    "name": "Morón Air Base",
+    "location": "Morón, Spain",
+    "timeZone": "Europe/Madrid"
+  },
+  "LFPG": {
+    "name": "Charles de Gaulle Airport",
+    "location": "Paris, France",
+    "timeZone": "Europe/Paris"
+  },
+  "LGAV": {
+    "name": "Athens International Airport / Hellenic military use",
+    "location": "Athens, Greece",
+    "timeZone": "Europe/Athens"
+  },
+  "LGSA": {
+    "name": "Souda Bay",
+    "location": "Chania, Greece",
+    "timeZone": "Europe/Athens"
+  },
+  "LHKE": {
+    "name": "Kecskemét Air Base",
+    "location": "Kecskemét, Hungary",
+    "timeZone": "Europe/Budapest"
+  },
+  "LHPA": {
+    "name": "Pápa Air Base",
+    "location": "Pápa, Hungary",
+    "timeZone": "Europe/Budapest"
+  },
+  "LICC": {
+    "name": "Naval Air Station Sigonella",
+    "location": "Catania, Italy",
+    "timeZone": "Europe/Rome"
+  },
+  "LIPA": {
+    "name": "Aviano Air Base",
+    "location": "Aviano, Italy",
+    "timeZone": "Europe/Rome"
+  },
+  "LIRF": {
+    "name": "Leonardo da Vinci–Fiumicino Airport",
+    "location": "Rome, Italy",
+    "timeZone": "Europe/Rome"
+  },
+  "LKCV": {
+    "name": "Čáslav Air Base",
+    "location": "Čáslav, Czechia",
+    "timeZone": "Europe/Prague"
+  },
+  "LOWW": {
+    "name": "Vienna International Airport",
+    "location": "Vienna, Austria",
+    "timeZone": "Europe/Vienna"
+  },
+  "LRCK": {
+    "name": "Mihail Kogălniceanu Air Base",
+    "location": "Constanța, Romania",
+    "timeZone": "Europe/Bucharest"
+  },
+  "LRSM": {
+    "name": "Satu Mare Airport / Romanian military use",
+    "location": "Satu Mare, Romania",
+    "timeZone": "Europe/Bucharest"
+  },
+  "LSZH": {
+    "name": "Zurich Airport",
+    "location": "Zurich, Switzerland",
+    "timeZone": "Europe/Zurich"
+  },
+  "LTAC": {
+    "name": "Ankara Esenboğa / Ankara military area",
+    "location": "Ankara, Türkiye",
+    "timeZone": "Europe/Istanbul"
+  },
+  "LTAG": {
+    "name": "Incirlik Air Base",
+    "location": "Adana, Türkiye",
+    "timeZone": "Europe/Istanbul"
+  },
+  "LTFM": {
+    "name": "Istanbul Airport",
+    "location": "Istanbul, Türkiye",
+    "timeZone": "Europe/Istanbul"
+  },
+  "LYBE": {
+    "name": "Belgrade Nikola Tesla Airport",
+    "location": "Belgrade, Serbia",
+    "timeZone": "Europe/Belgrade"
+  },
+  "MMMX": {
+    "name": "Mexico City International Airport",
+    "location": "Mexico City, Mexico",
+    "timeZone": "America/Mexico_City"
+  },
+  "NZAA": {
+    "name": "Auckland Airport",
+    "location": "Auckland, New Zealand",
+    "timeZone": "Pacific/Auckland"
+  },
+  "NZOH": {
+    "name": "RNZAF Base Ohakea",
+    "location": "Ohakea, New Zealand",
+    "timeZone": "Pacific/Auckland"
+  },
+  "NZWN": {
+    "name": "Wellington International Airport / RNZAF",
+    "location": "Wellington, New Zealand",
+    "timeZone": "Pacific/Auckland"
+  },
+  "NZWP": {
+    "name": "RNZAF Base Auckland / Whenuapai",
+    "location": "Auckland, New Zealand",
+    "timeZone": "Pacific/Auckland"
+  },
+  "OERK": {
+    "name": "King Khalid International Airport",
+    "location": "Riyadh, Saudi Arabia",
+    "timeZone": "Asia/Riyadh"
   },
   "OMDB": {
     "name": "Dubai International Airport",
@@ -274,224 +599,149 @@
     "location": "Doha, Qatar",
     "timeZone": "Asia/Qatar"
   },
-  "OERK": {
-    "name": "King Khalid International Airport",
-    "location": "Riyadh, Saudi Arabia",
-    "timeZone": "Asia/Riyadh"
+  "PGUA": {
+    "name": "Andersen Air Force Base",
+    "location": "Yigo, Guam",
+    "timeZone": "Pacific/Guam"
   },
-  "LTFM": {
-    "name": "Istanbul Airport",
-    "location": "Istanbul, Türkiye",
-    "timeZone": "Europe/Istanbul"
+  "PGUM": {
+    "name": "Antonio B. Won Pat International Airport",
+    "location": "Tamuning, Guam",
+    "timeZone": "Pacific/Guam"
   },
-  "EGLL": {
-    "name": "Heathrow Airport",
-    "location": "London, United Kingdom",
-    "timeZone": "Europe/London"
+  "PHIK": {
+    "name": "Joint Base Pearl Harbor-Hickam",
+    "location": "Honolulu, Hawaii",
+    "timeZone": "Pacific/Honolulu"
   },
-  "EGKK": {
-    "name": "Gatwick Airport",
-    "location": "London, United Kingdom",
-    "timeZone": "Europe/London"
+  "PHNL": {
+    "name": "Daniel K. Inouye International Airport",
+    "location": "Honolulu, Hawaii",
+    "timeZone": "Pacific/Honolulu"
   },
-  "EGVN": {
-    "name": "RAF Brize Norton",
-    "location": "Brize Norton, United Kingdom",
-    "timeZone": "Europe/London"
+  "RJAA": {
+    "name": "Narita International Airport",
+    "location": "Narita, Japan",
+    "timeZone": "Asia/Tokyo"
   },
-  "ETAR": {
-    "name": "Ramstein Air Base",
-    "location": "Ramstein, Germany",
-    "timeZone": "Europe/Berlin"
+  "RJAH": {
+    "name": "Hyakuri Air Base",
+    "location": "Omitama, Japan",
+    "timeZone": "Asia/Tokyo"
   },
-  "ETAD": {
-    "name": "Spangdahlem Air Base",
-    "location": "Spangdahlem, Germany",
-    "timeZone": "Europe/Berlin"
+  "RJOI": {
+    "name": "Marine Corps Air Station Iwakuni",
+    "location": "Iwakuni, Japan",
+    "timeZone": "Asia/Tokyo"
   },
-  "EDDF": {
-    "name": "Frankfurt Airport",
-    "location": "Frankfurt, Germany",
-    "timeZone": "Europe/Berlin"
+  "RJSM": {
+    "name": "Misawa Air Base",
+    "location": "Misawa, Japan",
+    "timeZone": "Asia/Tokyo"
   },
-  "LFPG": {
-    "name": "Charles de Gaulle Airport",
-    "location": "Paris, France",
-    "timeZone": "Europe/Paris"
+  "RJTA": {
+    "name": "Naval Air Facility Atsugi",
+    "location": "Ayase, Japan",
+    "timeZone": "Asia/Tokyo"
   },
-  "LEMD": {
-    "name": "Adolfo Suárez Madrid-Barajas Airport",
-    "location": "Madrid, Spain",
-    "timeZone": "Europe/Madrid"
+  "RJTT": {
+    "name": "Tokyo Haneda Airport",
+    "location": "Tokyo, Japan",
+    "timeZone": "Asia/Tokyo"
   },
-  "LIRF": {
-    "name": "Leonardo da Vinci–Fiumicino Airport",
-    "location": "Rome, Italy",
-    "timeZone": "Europe/Rome"
+  "RJTY": {
+    "name": "Yokota Air Base",
+    "location": "Fussa, Japan",
+    "timeZone": "Asia/Tokyo"
   },
-  "EHAM": {
-    "name": "Amsterdam Airport Schiphol",
-    "location": "Amsterdam, Netherlands",
-    "timeZone": "Europe/Amsterdam"
+  "RKJK": {
+    "name": "Kunsan Air Base",
+    "location": "Gunsan, South Korea",
+    "timeZone": "Asia/Seoul"
   },
-  "LOWW": {
-    "name": "Vienna International Airport",
-    "location": "Vienna, Austria",
-    "timeZone": "Europe/Vienna"
+  "RKPK": {
+    "name": "Gimhae International Airport",
+    "location": "Busan, South Korea",
+    "timeZone": "Asia/Seoul"
   },
-  "LSZH": {
-    "name": "Zurich Airport",
-    "location": "Zurich, Switzerland",
-    "timeZone": "Europe/Zurich"
+  "RKSI": {
+    "name": "Incheon International Airport",
+    "location": "Incheon, South Korea",
+    "timeZone": "Asia/Seoul"
   },
-  "YSSY": {
-    "name": "Sydney Kingsford Smith Airport",
-    "location": "Sydney, Australia",
-    "timeZone": "Australia/Sydney"
+  "RKSO": {
+    "name": "Osan Air Base",
+    "location": "Pyeongtaek, South Korea",
+    "timeZone": "Asia/Seoul"
   },
-  "YMML": {
-    "name": "Melbourne Airport",
-    "location": "Melbourne, Australia",
-    "timeZone": "Australia/Melbourne"
+  "RODN": {
+    "name": "Kadena Air Base",
+    "location": "Okinawa, Japan",
+    "timeZone": "Asia/Tokyo"
   },
-  "NZAA": {
-    "name": "Auckland Airport",
-    "location": "Auckland, New Zealand",
-    "timeZone": "Pacific/Auckland"
-  },
-  "FAOR": {
-    "name": "O. R. Tambo International Airport",
-    "location": "Johannesburg, South Africa",
-    "timeZone": "Africa/Johannesburg"
-  },
-  "FACT": {
-    "name": "Cape Town International Airport",
-    "location": "Cape Town, South Africa",
-    "timeZone": "Africa/Johannesburg"
+  "RPLL": {
+    "name": "Ninoy Aquino International Airport",
+    "location": "Manila, Philippines",
+    "timeZone": "Asia/Manila"
   },
   "SBGR": {
     "name": "São Paulo/Guarulhos International Airport",
     "location": "São Paulo, Brazil",
     "timeZone": "America/Sao_Paulo"
   },
-  "MMMX": {
-    "name": "Mexico City International Airport",
-    "location": "Mexico City, Mexico",
-    "timeZone": "America/Mexico_City"
+  "UWWW": {
+    "name": "Kurumoch Airport",
+    "location": "Samara, Russia",
+    "timeZone": "Europe/Samara"
   },
-  "SAE": {
-    "name": "Unresolved airport code from prior list",
-    "location": "Location not confirmed",
-    "timeZone": "Etc/UTC"
+  "VHHH": {
+    "name": "Hong Kong International Airport",
+    "location": "Hong Kong",
+    "timeZone": "Asia/Hong_Kong"
   },
-  "OTBH": {
-    "name": "Al Udeid Air Base",
-    "location": "Doha, Qatar",
-    "timeZone": "Asia/Qatar"
+  "VIDP": {
+    "name": "Indira Gandhi International Airport",
+    "location": "New Delhi, India",
+    "timeZone": "Asia/Kolkata"
   },
-  "OTBT": {
-    "name": "Dukhan Air Base",
-    "location": "Dukhan, Qatar",
-    "timeZone": "Asia/Qatar"
+  "VTBS": {
+    "name": "Suvarnabhumi Airport",
+    "location": "Bangkok, Thailand",
+    "timeZone": "Asia/Bangkok"
   },
-  "OMAM": {
-    "name": "Al Dhafra Air Base",
-    "location": "Abu Dhabi, United Arab Emirates",
-    "timeZone": "Asia/Dubai"
+  "WSSS": {
+    "name": "Singapore Changi Airport",
+    "location": "Singapore",
+    "timeZone": "Asia/Singapore"
   },
-  "OMDM": {
-    "name": "Al Minhad Air Base",
-    "location": "Dubai, United Arab Emirates",
-    "timeZone": "Asia/Dubai"
+  "YAMB": {
+    "name": "RAAF Base Amberley",
+    "location": "Amberley, Queensland, Australia",
+    "timeZone": "Australia/Brisbane"
   },
-  "OKAS": {
-    "name": "Ali Al Salem Air Base",
-    "location": "Kuwait",
-    "timeZone": "Asia/Kuwait"
+  "YBAS": {
+    "name": "RAAF Base Townsville",
+    "location": "Townsville, Queensland, Australia",
+    "timeZone": "Australia/Brisbane"
   },
-  "OKAJ": {
-    "name": "Ahmad Al Jaber Air Base",
-    "location": "Kuwait",
-    "timeZone": "Asia/Kuwait"
+  "YMEN": {
+    "name": "RAAF Base East Sale",
+    "location": "East Sale, Victoria, Australia",
+    "timeZone": "Australia/Melbourne"
   },
-  "OBBS": {
-    "name": "Sheikh Isa Air Base",
-    "location": "Sakhir, Bahrain",
-    "timeZone": "Asia/Bahrain"
+  "YMML": {
+    "name": "Melbourne Airport",
+    "location": "Melbourne, Australia",
+    "timeZone": "Australia/Melbourne"
   },
-  "OJMS": {
-    "name": "Muwaffaq Salti Air Base",
-    "location": "Azraq, Jordan",
-    "timeZone": "Asia/Amman"
+  "YPAD": {
+    "name": "RAAF Base Edinburgh",
+    "location": "Adelaide, South Australia",
+    "timeZone": "Australia/Adelaide"
   },
-  "OEKJ": {
-    "name": "Prince Sultan Air Base",
-    "location": "Al Kharj, Saudi Arabia",
-    "timeZone": "Asia/Riyadh"
-  },
-  "OEDR": {
-    "name": "King Abdulaziz Air Base",
-    "location": "Dhahran, Saudi Arabia",
-    "timeZone": "Asia/Riyadh"
-  },
-  "OEKM": {
-    "name": "King Khalid Air Base",
-    "location": "Khamis Mushait, Saudi Arabia",
-    "timeZone": "Asia/Riyadh"
-  },
-  "OERY": {
-    "name": "Riyadh Air Base",
-    "location": "Riyadh, Saudi Arabia",
-    "timeZone": "Asia/Riyadh"
-  },
-  "OOTH": {
-    "name": "Thumrait Air Base",
-    "location": "Thumrait, Oman",
-    "timeZone": "Asia/Muscat"
-  },
-  "OOMA": {
-    "name": "Masirah Air Base",
-    "location": "Masirah Island, Oman",
-    "timeZone": "Asia/Muscat"
-  },
-  "OOMN": {
-    "name": "Al Musannah Air Base",
-    "location": "Al Musannah, Oman",
-    "timeZone": "Asia/Muscat"
-  },
-  "OOAD": {
-    "name": "RAFO Adam",
-    "location": "Adam, Oman",
-    "timeZone": "Asia/Muscat"
-  },
-  "OOKB": {
-    "name": "Khasab Air Base",
-    "location": "Khasab, Oman",
-    "timeZone": "Asia/Muscat"
-  },
-  "ORAA": {
-    "name": "Al Asad Air Base",
-    "location": "Al Anbar, Iraq",
-    "timeZone": "Asia/Baghdad"
-  },
-  "ORBD": {
-    "name": "Balad Air Base",
-    "location": "Balad, Iraq",
-    "timeZone": "Asia/Baghdad"
-  },
-  "ORAT": {
-    "name": "Al Taqaddum Air Base",
-    "location": "Al Anbar, Iraq",
-    "timeZone": "Asia/Baghdad"
-  },
-  "LTAG": {
-    "name": "Incirlik Air Base",
-    "location": "Adana, Türkiye",
-    "timeZone": "Europe/Istanbul"
-  },
-  "LCRA": {
-    "name": "RAF Akrotiri",
-    "location": "Akrotiri, Cyprus",
-    "timeZone": "Asia/Nicosia"
+  "YSSY": {
+    "name": "Sydney Kingsford Smith Airport",
+    "location": "Sydney, Australia",
+    "timeZone": "Australia/Sydney"
   }
 }
