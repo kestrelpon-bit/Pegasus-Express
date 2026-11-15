@@ -1,26 +1,29 @@
-const CACHE_NAME = "pegasus-express-v1.4.8";
+/* Pegasus Express Calculator V1.4.20 service worker */
+const CACHE_NAME = "pegasus-express-v1.4.21";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
   "./app-icon-192.png",
   "./app-icon-512.png",
-  "./apple-touch-icon.png"
+  "./apple-touch-icon.png",
+  "./pegasus-express-card.png"
 ];
 
 self.addEventListener("install", event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
     await cache.addAll(APP_SHELL);
+    await self.skipWaiting();
   })());
-  // Do not skipWaiting: let the current session finish, then apply the update
-  // when the user reloads from the app's existing update prompt.
 });
 
 self.addEventListener("activate", event => {
   event.waitUntil((async () => {
-    const keys = await caches.keys();
-    await Promise.all(keys.filter(key => key.startsWith("pegasus-express-") && key !== CACHE_NAME).map(key => caches.delete(key)));
+    const names = await caches.keys();
+    await Promise.all(names.filter(name =>
+      name.startsWith("pegasus-express-") && name !== CACHE_NAME
+    ).map(name => caches.delete(name)));
     await self.clients.claim();
   })());
 });
@@ -31,35 +34,35 @@ self.addEventListener("fetch", event => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  // Navigation: prefer the deployed HTML so users receive updates, but fall
-  // back to the cached app shell when offline.
-  if (request.mode === "navigate") {
+  // Keep navigation/app-shell fresh when online, with the cached app as fallback.
+  if (request.mode === "navigate" || url.pathname.endsWith("/index.html") || url.pathname.endsWith("/")) {
     event.respondWith((async () => {
       try {
-        const response = await fetch(request, { cache: "no-store" });
+        const response = await fetch(request);
         if (response && response.ok) {
           const cache = await caches.open(CACHE_NAME);
           cache.put("./index.html", response.clone());
         }
         return response;
-      } catch (_) {
-        return (await caches.match(request)) || (await caches.match("./index.html"));
+      } catch (error) {
+        return (await caches.match(request)) || (await caches.match("./index.html")) || Response.error();
       }
     })());
     return;
   }
 
-  // Cache-first for the small static app-shell files; update them in the
-  // background when online.
   event.respondWith((async () => {
     const cached = await caches.match(request);
-    const network = fetch(request).then(response => {
+    if (cached) return cached;
+    try {
+      const response = await fetch(request);
       if (response && response.ok) {
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+        const cache = await caches.open(CACHE_NAME);
+        cache.put(request, response.clone());
       }
       return response;
-    }).catch(() => cached);
-    return cached || network;
+    } catch (error) {
+      return Response.error();
+    }
   })());
 });
