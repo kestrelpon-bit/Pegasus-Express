@@ -1,14 +1,13 @@
 {
-  "id": "./",
   "name": "Pegasus Express Calculator",
   "short_name": "Pegasus Express",
-  "description": "Offline-capable Pegasus Express aviation calculator.",
-  "start_url": "./",
+  "description": "Offline-capable Pegasus Express flight planning calculator.",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#071321",
-  "theme_color": "#071321",
+  "background_color": "#061426",
+  "theme_color": "#061426",
   "icons": [
     {
       "src": "./app-icon-192.png",
@@ -17,7 +16,7 @@
       "purpose": "any"
     },
     {
-      "src": "./icon-512.png",
+      "src": "./app-icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
