@@ -1,5 +1,5 @@
-/* Pegasus Express Calculator V1.4.20 service worker */
-const CACHE_NAME = "pegasus-express-v1.4.21";
+/* Pegasus Express Calculator V1.4.55 service worker */
+const CACHE_NAME = "pegasus-express-v1.4.55";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -34,14 +34,15 @@ self.addEventListener("fetch", event => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  // Keep navigation/app-shell fresh when online, with the cached app as fallback.
+  // Network-first for the app document so published updates are picked up;
+  // cached app shell is used when offline.
   if (request.mode === "navigate" || url.pathname.endsWith("/index.html") || url.pathname.endsWith("/")) {
     event.respondWith((async () => {
       try {
         const response = await fetch(request);
         if (response && response.ok) {
           const cache = await caches.open(CACHE_NAME);
-          cache.put("./index.html", response.clone());
+          await cache.put("./index.html", response.clone());
         }
         return response;
       } catch (error) {
@@ -58,7 +59,7 @@ self.addEventListener("fetch", event => {
       const response = await fetch(request);
       if (response && response.ok) {
         const cache = await caches.open(CACHE_NAME);
-        cache.put(request, response.clone());
+        await cache.put(request, response.clone());
       }
       return response;
     } catch (error) {
