@@ -1,51 +1,24 @@
-# Pegasus Express Calculator — V1.4.73
+# Pegasus Express Calculator — V1.6.2
 
-Complete GitHub Pages package for Pegasus Express Calculator V1.4.73.
+GitHub Pages-ready package for Pegasus Express Calculator.
+
+## Deploy to GitHub Pages
+
+1. Create or open the repository that will host Pegasus Express.
+2. Upload the **contents** of this folder to the repository root (not the enclosing ZIP).
+3. In **Settings → Pages**, select **Deploy from a branch**, choose the deployment branch (usually `main`) and folder `/ (root)`, then save.
+4. Open the Pages URL over HTTPS. The app can then be installed as a PWA on supported browsers.
 
 ## Package contents
 
-- `index.html` — full calculator application (V1.4.73)
-- `manifest.webmanifest` — installable web-app metadata
-- `service-worker.js` — offline app-shell caching and update support
-- `app-icon-192.png` — 192×192 app icon
-- `app-icon-512.png` — 512×512 app icon
-- `apple-touch-icon.png` — iPhone/iPad Home Screen icon
-- `pegasus-express-card.png` — original full-resolution Pegasus Express artwork
+- `index.html` — complete self-contained application (styles, scripts, embedded data and artwork).
+- `manifest.webmanifest` — install metadata.
+- `service-worker.js` — app-shell caching and update support.
+- `app-icon-192.png`, `app-icon-512.png`, `apple-touch-icon.png` — install and home-screen icons.
+- `assets/pegasus-express-original.png` — full-resolution Pegasus Express artwork retained as an asset.
 
-## Publish with GitHub Pages
+## Notes
 
-1. Download and unzip this package.
-2. Upload the **contents** of the `Pegasus_Express_Calculator_V1.4.73_GITHUB` folder to the root of your GitHub repository.
-3. Commit and push the files.
-4. In GitHub, open **Settings → Pages**.
-5. Under Build and deployment, select **Deploy from a branch**, choose your publishing branch (commonly `main`) and `/(root)`, then save.
-6. Open the published GitHub Pages URL while online and allow the first load to finish.
-
-Keep the filenames and relative paths unchanged. The manifest and service worker expect the files beside `index.html`.
-
-## Install on iPhone or iPad
-
-1. Open the GitHub Pages URL in Safari.
-2. Tap **Share**.
-3. Choose **Add to Home Screen**.
-4. Confirm the name and tap **Add**.
-
-## Install on desktop
-
-Use the install option in a supported browser, such as the install icon in Chrome's address bar or the browser's app-install menu.
-
-## Offline use and updates
-
-- The first visit must complete while online so the service worker can install and cache the app shell.
-- After publishing a newer version, open the site online to allow the browser to check for and install the updated app shell.
-- If an installed copy appears stale, close and reopen it after visiting the site online. Service-worker update timing varies by platform.
-
-## V1.4.73 change
-
-- Changed the diagonal hash marks on the AR ON / ETOPS OFF minimum-fuel sections to **yellow** when regular calculated BINGO exceeds 35.00K.
-- Retained the blue minimum-fuel sections and their Standpipe Lim / Fuel Pump Lim labels.
-- Retained the prior V1.4.71 functionality and assets.
-
-
-## V1.4.73 change
-- Extended the gold-and-blue diagonal hash pattern to AR ON / ETOPS ON when final ETOPS BINGO exceeds 35K. The same pattern remains in AR ON / ETOPS OFF when regular calculated BINGO exceeds 35K.
+- No build step or package manager is required; the application is a static site.
+- Serve from the repository root so the relative PWA paths resolve correctly.
+- Browser-local saved profiles and preferences remain in that browser's local storage; publishing the site does not migrate local browser data.
