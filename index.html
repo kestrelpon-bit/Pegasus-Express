@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#061426"><title>Pegasus Express Calculator V1.6.5</title>
+<meta name="theme-color" content="#061426"><title>Pegasus Express Calculator V1.6.6</title>
 <style>
 :root{color-scheme:dark;--bg:#030B16;--panel:#0B1929;--row:#102238;--line:#1D344B;--txt:#F4F7FC;--muted:#9AADC2;--green:#63D69A;--red:#F07178;--zulu:#E8B34B}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -1636,6 +1636,19 @@ body:has(#perdiemSection:not(.hidden)) #perdiemSection{
   #bottomNav .nav-icon { font-size:17px!important; }
 }
 </style>
+</style>
+
+<style id="v1-6-6-editable-field-typography">
+/* V1.6.6: consistent 16px editable-field typography across every tool.
+   This is intentionally limited to editable controls; labels, navigation,
+   buttons, headings, and read-only output retain their role-specific sizing. */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="image"]):not([type="hidden"]),
+select,
+textarea,
+[contenteditable="true"],
+[role="textbox"] {
+  font-size:16px !important;
+}
 </style>
 </head>
 <body><main>
@@ -4100,7 +4113,7 @@ document.addEventListener("wheel",event=>{
   const changed=[];
   const exportStyle=document.createElement("style");
   const mobileSoeExport=window.matchMedia&&window.matchMedia("(max-width:600px)").matches;
-  exportStyle.textContent=`#output .event{grid-template-columns:minmax(0,1fr) minmax(180px,auto)!important;gap:16px!important;padding:15px 16px!important}#output .times{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto!important;column-gap:0!important;row-gap:5px!important;justify-content:end!important;align-items:center!important;text-align:right!important;white-space:nowrap!important}#output .times .time-pair,#output .times .date-pair{display:inline-flex!important;width:max-content!important;gap:4px!important;justify-content:flex-end!important;align-items:center!important;margin-left:auto!important}#output .times .separator{color:var(--muted)!important;font-weight:400!important}#output .times small{display:contents!important}${mobileSoeExport?`#output .event{grid-template-columns:minmax(0,1fr) minmax(190px,auto)!important;gap:14px!important;padding:17px 16px!important}#output .eventname{font-size:22px!important;line-height:1.25!important}#output .offset{font-size:17px!important;line-height:1.3!important;margin-top:5px!important}#output .times{font-size:20px!important;line-height:1.3!important;row-gap:7px!important}#output .times .time-pair,#output .times .date-pair{gap:5px!important}`:""}`;
+  exportStyle.textContent=`#output .event{grid-template-columns:minmax(0,1fr) minmax(180px,auto)!important;gap:16px!important;padding:15px 16px!important}#output .times{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto!important;column-gap:0!important;row-gap:5px!important;justify-content:end!important;align-items:center!important;text-align:right!important;white-space:nowrap!important}#output .times .time-pair,#output .times .date-pair{display:inline-flex!important;width:max-content!important;gap:4px!important;justify-content:flex-end!important;align-items:center!important;margin-left:auto!important}#output .times .separator{color:var(--muted)!important;font-weight:400!important}#output .times small{display:contents!important}${mobileSoeExport?`#output .event{grid-template-columns:minmax(0,1fr) minmax(190px,auto)!important;gap:14px!important;padding:17px 16px!important}#output .eventname{font-size:23px!important;line-height:1.25!important}#output .offset{font-size:18px!important;line-height:1.3!important;margin-top:5px!important}#output .times{font-size:21px!important;line-height:1.3!important;row-gap:7px!important}#output .times .time-pair,#output .times .date-pair{gap:5px!important}`:""}`;
   document.head.appendChild(exportStyle);
   changed.push({node:source,wasHidden:source.classList.contains("hidden"),oldStyle:source.getAttribute("style")});
   source.style.setProperty("width","640px","important");
@@ -4151,11 +4164,11 @@ document.addEventListener("wheel",event=>{
    ctx.textBaseline="alphabetic";
    const soeTitle=`SOE: ${dateLabel} (${offsetText})`;
    ctx.fillStyle="#F4F7FC";
-   let titleFontSize=mobileSoeExport?34:28;
+   let titleFontSize=mobileSoeExport?35:28;
    do{ctx.font=`800 ${titleFontSize}px -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif`;if(ctx.measureText(soeTitle).width<=width)break;titleFontSize--;}while(titleFontSize>16);
    // Keep the complete date/time-zone header inside the exported image on every device.
    ctx.fillText(soeTitle,pad,52);
-   ctx.fillStyle="#8FB7D8";ctx.font=`800 ${mobileSoeExport?27:22}px -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif`;
+   ctx.fillStyle="#8FB7D8";ctx.font=`800 ${mobileSoeExport?28:22}px -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif`;
    ctx.fillText(profileName.toUpperCase(),pad,94);
    ctx.fillStyle="#29445D";ctx.fillRect(pad,141,width,1.5);
    const baseX=rect.left,baseY=rect.top;
